@@ -1,14 +1,15 @@
     public abstract class Veiculo {
         private String marca;
         private String modelo;
-        private int quantidadeDisponivel;
+        private boolean disponivel;
         private int anoFabricacao;
         private double kmRodados;
+        //verificar se está disponível
 
-    public Veiculo(String marca, String modelo, int quantidadeDisponivel, int anoFabricacao, double kmRodados){
+    public Veiculo(String marca, String modelo, boolean disponivel, int anoFabricacao, double kmRodados){
         this.marca = marca;
         this.modelo = modelo;
-        this.quantidadeDisponivel = quantidadeDisponivel;
+        this.disponivel = disponivel;
         this.anoFabricacao = anoFabricacao;
         this.kmRodados = kmRodados;
     }
@@ -22,8 +23,8 @@
         return modelo;
     }
 
-    public int getQuantidadeDisponivel(){
-        return quantidadeDisponivel;
+    public boolean getDisponivel(){
+        return disponivel;
     }
 
     public int getAnoFabricacao(){
@@ -36,7 +37,7 @@
     
     @Override
     public String toString(){
-        return ("Marca: " + getMarca() + "\nModelo: " + getModelo() + "\nQuantidade Disponivel: " + getQuantidadeDisponivel() + "\nAno de fabricação: " + getAnoFabricacao());
+        return ("Marca: " + getMarca() + "\nModelo: " + getModelo() + "\nQuantidade Disponivel: " + getDisponivel() + "\nAno de fabricação: " + getAnoFabricacao());
     }
     
     public abstract double calcularAluguel();

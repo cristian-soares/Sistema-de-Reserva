@@ -2,8 +2,8 @@
         private boolean ehAutomatico;  
         private double valorEntrada; //Valor pago antes da reserva, utilizado para calcular o Aluguel
 
-    public Carro(String marca, String modelo, int quantidadeDisponivel, int anoFabricacao,double kmRodados, boolean ehAutomatico, double valorEntrada){
-        super(marca, modelo, quantidadeDisponivel, anoFabricacao, kmRodados);
+    public Carro(String marca, String modelo, boolean disponivel, int anoFabricacao,double kmRodados, boolean ehAutomatico, double valorEntrada){
+        super(marca, modelo, disponivel, anoFabricacao, kmRodados);
         this.ehAutomatico = ehAutomatico;
         this.valorEntrada = valorEntrada;
     }
@@ -12,13 +12,13 @@
         return ehAutomatico;
     }
 
-    public double getvalorEntrada(){
+    public double getValorEntrada(){
         return valorEntrada;
     }
 
     @Override
     public String toString(){
-        return super.toString() + "\nCategoria: " + getEhAutomatico() + "\nValor de Entrada: " + getvalorEntrada();
+        return super.toString() + "\nCategoria: " + getEhAutomatico() + "\nValor de Entrada: " + getValorEntrada();
     }
     
     @Override
