@@ -12,7 +12,7 @@ public class Van extends Veiculo
     public int getNumeroDeAssentos() {
         return numeroDeAssentos;
     }
-    
+   
     public boolean getPossuiPortaAutomatica() {
         return possuiPortaAutomatica;
     }

@@ -2,7 +2,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Sistema {
-    private static String tipoUsuario;
+    private static int tipoUsuario;
     private static List<Veiculo> listaVeiculos;
     private static List<Reserva> listaReservaCliente;
     private static Scanner entrada;
