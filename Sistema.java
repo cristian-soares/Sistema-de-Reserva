@@ -8,7 +8,9 @@ public class Sistema {
     private static Scanner entrada;
 
     public static void main(String[] args) {
-        
+        //carregar listas
+        //chamar metodo
+        //
     }
 
     public static void gerarMenuCliente(){
@@ -35,8 +37,20 @@ public class Sistema {
 
     }
 
-    public static void salvarEmArquivo(){
+    public static void salvarArquivoVeiculo(){
 
+    }
+
+    public static void salvarArquivoReserva(){
+
+    }
+
+    public static void lerArquivoReserva(){
+
+    }
+    
+    public static void lerArquivoVeiculo(){
+        
     }
 
     public static void exibirListaReserva(){
