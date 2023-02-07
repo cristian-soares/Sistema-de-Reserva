@@ -1,8 +1,8 @@
-import java.util.*;
+
 public class Reserva {
     private String nomeCliente;
     private String cpfCliente;
-    private List<Veiculo> veiculos;
+    private Veiculo veiculos;
     private String tempoReserva;
 
     public Reserva(String nomeCliente, String cpf ,Veiculo veiculo, String tempoReserva){
@@ -10,7 +10,7 @@ public class Reserva {
         cpfCliente = cpf;
         this.veiculo = veiculo;
         this.tempoReserva = tempoReserva;
-        veiculos = new ArrayList<>();
+  
     }
     
     public void addVeiculo(veic){
