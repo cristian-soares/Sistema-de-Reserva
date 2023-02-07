@@ -30,11 +30,11 @@ public class Sistema {
     }   
 
     public static void cadastrarVeiculo(Veiculo v){
-
+        listaveiculos.add(v);
     }
 
     public static void removerVeiculo(Veiculo v){
-
+        listaveiculos.remove(v);
     }
 
     public static void salvarArquivoVeiculo(){
@@ -54,7 +54,7 @@ public class Sistema {
     }
 
     public static void exibirListaReserva(){
-
+    
     }
 
     public static void exibirListaVeiculoADM(){
