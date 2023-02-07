@@ -10,12 +10,12 @@
         this.valorEntrada = valorEntrada;
     }
     
-    //Metodo para retornar o estado do atributo ehAutomático
+    //Metodo para retornar se o carro e automatico
     public boolean getEhAutomatico(){
         return ehAutomatico;
     }
     
-    //Metodo para retornar o estado do atributo valorEntrada
+    //Metodo para retornar o valor da entrada, para alugar o carro
     public double getValorEntrada(){
         return valorEntrada;
     }
