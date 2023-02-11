@@ -3,8 +3,8 @@ public class Van extends Veiculo
     private int numeroDeAssentos;
     private boolean possuiPortaAutomatica;
     
-    public Van(String marca, String modelo, boolean disponivel, int anoFabricacao, double kmRodados, int numeroDeAssentos, boolean possuiPortaAutomatica){
-        super(marca, modelo, disponivel, anoFabricacao, kmRodados);
+    public Van(String marca, String modelo, boolean disponivel, int anoFabricacao, double kmRodados,int id, int numeroDeAssentos, boolean possuiPortaAutomatica){
+        super(marca, modelo, disponivel, anoFabricacao, kmRodados,id);
         this.numeroDeAssentos = numeroDeAssentos;
         this.possuiPortaAutomatica = possuiPortaAutomatica;
     }
