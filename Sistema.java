@@ -8,17 +8,17 @@ public class Sistema {
     private static Scanner entrada;
 
    // public static void main(String[] args) {
-        
+        //Duda
     //}
 
     public static void gerarMenuCliente(){
         System.out.println("################ MENU CLIENTE ################");
         System.out.println();
         System.out.println("Escolha uma das opcoes a seguir:"); 
-        System.out.println("1 - Ver lista de veiculos disponiveis");
-        System.out.println("2 - Ver detalhes de um veiculo especifico");
-        System.out.println("3 - Realizar reserva");
-        System.out.println("4 - Cancelar reserva"); 
+        System.out.println("1 - Ver lista de veiculos disponiveis"); //nicholas
+        System.out.println("2 - Ver detalhes de um veiculo especifico");//carol
+        System.out.println("3 - Realizar reserva");//carol
+        System.out.println("4 - Cancelar reserva"); //carol
         System.out.println("5 - Sair");
         System.out.println();
         System.out.println("##############################################"); 
@@ -29,12 +29,12 @@ public class Sistema {
         System.out.println();
         System.out.println("Escolha uma das opcoes a seguir:"); 
         System.out.println("1 - Cadastrar veiculo"); // Cristian
-        System.out.println("2 - Remover veiculo");
-        System.out.println("3 - Ver lista completa de veiculos");
-        System.out.println("4 - Ver detalhes de um veiculo especifico");
-        System.out.println("5 - Ver lista completa de reservas"); 
-        System.out.println("6 - Ver detalhes de uma reserva especifica");
-        System.out.println("7 - Visualizar Relatorio");
+        System.out.println("2 - Remover veiculo");// Cristian
+        System.out.println("3 - Ver lista completa de veiculos");// Cristian
+        System.out.println("4 - Ver detalhes de um veiculo especifico");//nicholas
+        System.out.println("5 - Ver lista completa de reservas"); //nicholas
+        System.out.println("6 - Ver detalhes de uma reserva especifica"); //duda
+        System.out.println("7 - Visualizar Relatorio"); //duda
         System.out.println("8 - Salvar a lista de veiculos");
         System.out.println("9 - Carregar a lista de veiculos"); 
         System.out.println("10 - Salvar a lista de reservas");
