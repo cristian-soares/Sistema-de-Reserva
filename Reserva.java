@@ -4,10 +4,10 @@ public class Reserva {
     private Veiculo reservaVeiculos;
     private String tempoReserva;
 
-    public Reserva(String nomeCliente, String cpf ,Veiculo veiculo, String tempoReserva){
+    public Reserva(String nomeCliente, String cpf ,Veiculo reservaVeiculo, String tempoReserva){
         this.nomeCliente = nomeCliente;
         this.cpfCliente = cpf;
-        this.veiculo = veiculo;
+        this.reservaVeiculo = reservaVeiculo;
         this.tempoReserva = tempoReserva;
     }
 
