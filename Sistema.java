@@ -33,39 +33,116 @@ public class Sistema {
         System.out.println("3 - Ver lista completa de veiculos");
         System.out.println("4 - Ver detalhes de um veiculo especifico");
         System.out.println("5 - Ver lista completa de reservas"); 
-        System.out.println("6 - Ver detalhes de uma reserva especifica"); 
-        System.out.println("7 - Remover Reserva"); 
-        System.out.println("8 - Visualizar Relatorio");
-        System.out.println("9 - Salvar a lista de veiculos");
-        System.out.println("10 - Carregar a lista de veiculos"); 
-        System.out.println("11 - Salvar a lista de reservas");
-        System.out.println("12 - Carregar a lista de reservas");
-        System.out.println("13 - Sair");
+        System.out.println("6 - Ver detalhes de uma reserva especifica");
+        System.out.println("7 - Visualizar Relatorio");
+        System.out.println("8 - Salvar a lista de veiculos");
+        System.out.println("9 - Carregar a lista de veiculos"); 
+        System.out.println("10 - Salvar a lista de reservas");
+        System.out.println("11 - Carregar a lista de reservas");
+        System.out.println("12 - Sair");
         System.out.println();
         System.out.println("###############################################"); 
     }
 
-    public static void tratarMenuCliente(){
-
+    public static void tratarMenuCliente(int opcao){
+        switch(opcao){
+            case 1:
+            exibirListaVeiculoCliente();
+            break;
+            case 2:
+            exibirDetalheVeiculoCliente();
+            break;
+            case 3:
+            fazerReserva();
+            break;
+            case 4:
+            cancelarReserva();
+            break;
+            case 5:
+            break;
+            default:
+            System.out.println("Opcao invalida");
+            break;
+        }
     }
 
-    public static void tratarMenuAdm(){
+    public static void tratarMenuAdm(int opcao){
+        switch(opcao){
+            case 1:
+            cadastrarVeiculo();
+            break;
+            case 2:
+            removerVeiculo();
+            break;
+            case 3:
+            exibirListaVeiculoADM();
+            break;
+            case 4:
+            exibirDetalheVeiculoADM();
+            break;
+            case 5:
+            exibirListaReserva();
+            break;
+            case 6:
+            exibirDetalheReserva();
+            break;
+            case 7:
+            menuRelatorio();
+            break;
+            case 8:
+            salvarListaVeiculos(String nomeArq);
+            break;
+            case 9:
+            lerArqVeiculos(String nomeArq);
+            break;
+            case 10:
+            salvarListaReserva(String nomeArq);
+            break;
+            case 11:
+            lerArqReservas(String nomeArq);
+            break;
+            case 12:
+            break;
 
-    }   
+            default:
+            System.out.println("Opcao invalida");
+            break;
+        }
 
-    public static void cadastrarVeiculo(Veiculo v){
+    }  
 
+    public static void menuRelatorio(){
+        
     }
 
-    public static void removerVeiculo(Veiculo v){
-
+    public static void cadastrarVeiculo(){
+        
     }
 
+    public static void removerVeiculo(){
+
+    }
+ 
+    /*Arquivo
     public static void salvarEmArquivo(){
 
     }
+    public static void salvarEmArquivo(){
+
+    }
+    public static void salvarEmArquivo(){
+
+    }
+    public static void salvarEmArquivo(){
+
+    }
+    Arquivo*/
 
     public static void exibirListaReserva(){
+
+    }
+
+    public static void exibirDetalheReserva(){
 
     }
 
@@ -73,15 +150,35 @@ public class Sistema {
         
     }
 
+    public static void exibirDetalheVeiculoADM(){
+       
+    }
+
     public static void exibirListaVeiculoCliente(){
+        //verifica quais veiculos tem o atributo "disponivel" = true, antes de exibir
+        //alguns atributos 
+    }
+
+    public static void exibirDetalheVeiculoCliente(){
         //verifica quais veiculos tem o atributo "disponivel" = true, antes de exibir 
+        //tds os atributos
     }
 
-    public static void fazerReserva(Veiculo v){
+    public static void fazerReserva(){
+          /*ler o id do veiculo, 
+            conferir se existe
+            passar parametros 
+            cria obj reserva
+        add na lista 
+            */
+       
 
     }
 
-    public static void cancelarReserva(String cpf){
+    public static void cancelarReserva(){
+        /*ler o cpf do cliente, 
+        conferir se existe
+            */
 
         //percorre a lista de reservas pelo cpf
         //verifica o tempo de reserva
