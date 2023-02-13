@@ -2,13 +2,13 @@
     public abstract class Veiculo {
         private String marca;
         private String modelo;
-        private String disponivel;
+        private boolean disponivel;
         private int anoFabricacao;
         private double kmRodados;
         private int id;
   
     //Construtor da classe
-    public Veiculo(String marca, String modelo, String disponivel, int anoFabricacao, double kmRodados, int id){
+    public Veiculo(String marca, String modelo, Boolean disponivel, int anoFabricacao, double kmRodados, int id){
         this.marca = marca;
         this.modelo = modelo;
         this.disponivel = disponivel;
@@ -27,7 +27,7 @@
         return modelo;
     }
     //Metodo que retorna se o veiculo está disponivel ou não
-    public String getDisponivel(){
+    public boolean getDisponivel(){
         return disponivel;
     }
     //Metodo que retorna qual o ano de fabricacao
