@@ -28,7 +28,7 @@ public class Sistema {
         System.out.println("############## MENU ADMINISTRADOR ##############");
         System.out.println();
         System.out.println("Escolha uma das opcoes a seguir:"); 
-        System.out.println("1 - Cadastrar veiculo");
+        System.out.println("1 - Cadastrar veiculo"); // Cristian
         System.out.println("2 - Remover veiculo");
         System.out.println("3 - Ver lista completa de veiculos");
         System.out.println("4 - Ver detalhes de um veiculo especifico");
