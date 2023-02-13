@@ -1,13 +1,13 @@
 public class Reserva {
     private String nomeCliente;
     private String cpfCliente;
-    private Veiculo reservaVeiculos;
+    private Veiculo reservaVeiculo;
     private String tempoReserva;
 
-    public Reserva(String nomeCliente, String cpf ,Veiculo reservaVeiculos, String tempoReserva){
+    public Reserva(String nomeCliente, String cpf ,Veiculo reservaVeiculo, String tempoReserva){
         this.nomeCliente = nomeCliente;
         this.cpfCliente = cpf;
-        this.reservaVeiculos = reservaVeiculos;
+        this.reservaVeiculo = reservaVeiculo;
         this.tempoReserva = tempoReserva;
     }
 
@@ -20,7 +20,7 @@ public class Reserva {
     }
 
     public Veiculo getVeiculo(){
-        return reservaVeiculos;
+        return reservaVeiculo;
     }
 
     public String getTempoReserva(){
