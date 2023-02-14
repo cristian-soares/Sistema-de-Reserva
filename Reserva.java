@@ -26,5 +26,10 @@ public class Reserva {
     public String getTempoReserva(){
         return tempoReserva;
     }
+
+    @Override 
+    public String toString(){
+        return ("Nome cliente" + getNomeCliente() + "/nCPF: " + getCpfCliente() + "/nVeiculo alugado: " + getVeiculo() + "/nTempo Reserva: " +getTempoReserva());
+    }
   
 }
