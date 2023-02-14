@@ -7,6 +7,8 @@ public class Sistema {
     private static List<Veiculo> listaVeiculos = new ArrayList<>();
     private static List<Reserva> listaReserva = new ArrayList<>();
     private static Scanner entrada;
+    private static int id;
+    private static Veiculo v;
 
     public static void main(String[] args) {
         System.out.println("Bem Vindo!");
@@ -84,10 +86,10 @@ public class Sistema {
     public static void tratarMenuAdm(int opcao){
         switch(opcao){
             case 1:
-            cadastrarVeiculo();
+            cadastrarVeiculo(v);
             break;
             case 2:
-            removerVeiculo();
+            removerVeiculo(id);
             break;
             case 3:
             exibirListaVeiculoADM();
@@ -213,7 +215,7 @@ public class Sistema {
 
     public static void exibirListaVeiculoADM(){
         for (Veiculo v : listaVeiculos) {
-            System.out.println(listaVeiculos.toString());
+            System.out.println(v.toString());
         }
     }
 
