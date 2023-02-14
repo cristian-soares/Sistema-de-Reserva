@@ -1,15 +1,16 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Sistema {
-    private static String tipoUsuario;
-    private static List<Veiculo> listaVeiculos;
-    private static List<Reserva> listaReservaCliente;
+    private static int tipoUsuario;
+    private static List<Veiculo> listaVeiculos = new ArrayList<>();
+    private static List<Reserva> listaReservaCliente = new ArrayList<>();
     private static Scanner entrada;
 
-   // public static void main(String[] args) {
-        //Duda
-    //}
+    public static void main(String[] args) {
+
+    }
 
     public static void gerarMenuCliente(){
         System.out.println("################ MENU CLIENTE ################");
@@ -59,10 +60,9 @@ public class Sistema {
             cancelarReserva();
             break;
             case 5:
-            break;
+            return;
             default:
             System.out.println("Opcao invalida");
-            break;
         }
     }
 
@@ -90,16 +90,16 @@ public class Sistema {
             menuRelatorio();
             break;
             case 8:
-            salvarListaVeiculos(String nomeArq);
+            TratamentoArquivos.salvarListaVeiculos("");
             break;
             case 9:
-            lerArqVeiculos(String nomeArq);
+            TratamentoArquivos.lerArqVeiculos("");
             break;
             case 10:
-            salvarListaReserva(String nomeArq);
+            TratamentoArquivos.salvarListaReserva("");
             break;
             case 11:
-            lerArqReservas(String nomeArq);
+            TratamentoArquivos.lerArqReservas("");
             break;
             case 12:
             break;
@@ -112,8 +112,24 @@ public class Sistema {
     }  
 
     public static void menuRelatorio(){
+        System.out.println("################ RELATORIOS ################");
+        System.out.println();
+        System.out.println("Escolha uma das opcoes a seguir:"); 
+        System.out.println("1 - Relatorio dos Veiculos reservados");
+        System.out.println("2 - Relatorio das Reservas");
+        System.out.println("3 - Relatorio dos Clientes");
+        System.out.println("4 - Sair"); 
+        System.out.println();
+        System.out.println("#############################################"); 
         
     }
+
+    public static void tratarMenuRelatorio(int opcao){
+        
+        
+    }
+
+
 
     public static void cadastrarVeiculo(){
         
