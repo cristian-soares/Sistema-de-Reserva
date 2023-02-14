@@ -103,6 +103,7 @@ public class Sistema {
             break;
             case 7:
             menuRelatorio();
+            tratarMenuRelatorio(entrada.nextInt());
             break;
             case 8:
             TratamentoArquivos.salvarListaVeiculos("");
@@ -133,14 +134,34 @@ public class Sistema {
         System.out.println("1 - Relatorio dos Veiculos reservados");
         System.out.println("2 - Relatorio das Reservas");
         System.out.println("3 - Relatorio dos Clientes");
-        System.out.println("4 - Sair"); 
+        System.out.println("4 - Voltar"); 
         System.out.println();
         System.out.println("#############################################"); 
         
     }
 
     public static void tratarMenuRelatorio(int opcao){
-        
+        switch(opcao){
+            case 1:
+            for (Veiculo v: listaVeiculos){
+                if(!v.getDisponivel()){
+                    System.out.println(v);
+                }
+            }
+            break;
+            case 2:
+            exibirListaReserva();
+            break;
+            case 3:
+            for (Reserva r: listaReserva){
+                System.out.println("Cliente: " + r.getNomeCliente() + "/nCPF: "+ r.getCpfCliente());
+            }
+            break;
+            case 4:
+            return;
+            default:
+            System.out.println("opcao invalida");
+        }
         
     }
 
@@ -168,7 +189,7 @@ public class Sistema {
         int cont = 0;
         for (Reserva r: listaReserva){
             if(r.getCpfCliente().equals(cpf)){
-                System.out.println(r.toString());
+                System.out.println(r);
                 cont++;
             }
         }
