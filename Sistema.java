@@ -84,10 +84,10 @@ public class Sistema {
     public static void tratarMenuAdm(int opcao){
         switch(opcao){
             case 1:
-            cadastrarVeiculo();
+            cadastrarVeiculo(Veiculo v);
             break;
             case 2:
-            removerVeiculo();
+            removerVeiculo(Veiculo v);
             break;
             case 3:
             exibirListaVeiculoADM();
@@ -167,16 +167,16 @@ public class Sistema {
 
 
 
-    public static void cadastrarVeiculo(){
-        
+    public static void cadastrarVeiculo(Veiculo v){
+        listaVeiculos.add(v);
     }
 
-    public static void removerVeiculo(){
-
+    public static void removerVeiculo(Veiculo v){
+        listaVeiculos.remove(v);
     }
 
     public static void exibirListaReserva(){
-
+     
     }
 
 /*
@@ -200,7 +200,9 @@ public class Sistema {
     }
 
     public static void exibirListaVeiculoADM(){
-        
+        for (Veiculo v : listaVeiculos) {
+            System.out.println(listaVeiculos.toString());
+        }
     }
 
     public static void exibirDetalheVeiculoADM(){
