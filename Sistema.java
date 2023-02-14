@@ -5,11 +5,26 @@ import java.util.Scanner;
 public class Sistema {
     private static int tipoUsuario;
     private static List<Veiculo> listaVeiculos = new ArrayList<>();
-    private static List<Reserva> listaReservaCliente = new ArrayList<>();
+    private static List<Reserva> listaReserva = new ArrayList<>();
     private static Scanner entrada;
 
     public static void main(String[] args) {
-
+        System.out.println("Bem Vindo!");
+        //Carregar as listas do arquivo
+        System.out.println("Eescolha o tipo de usuario (1 - Administrador/ 2 - Cliente): ");
+        tipoUsuario = entrada.nextInt();
+        switch(tipoUsuario){
+            case 1:
+            gerarMenuAdm();
+            tratarMenuAdm(entrada.nextInt());            
+            break;
+            case 2:
+            gerarMenuCliente();
+            tratarMenuCliente(entrada.nextInt());
+            break;
+            default:
+            System.out.println("opcao invalida");
+        }
     }
 
     public static void gerarMenuCliente(){
@@ -138,27 +153,28 @@ public class Sistema {
     public static void removerVeiculo(){
 
     }
- 
-    /*Arquivo
-    public static void salvarEmArquivo(){
-
-    }
-    public static void salvarEmArquivo(){
-
-    }
-    public static void salvarEmArquivo(){
-
-    }
-    public static void salvarEmArquivo(){
-
-    }
-    Arquivo*/
 
     public static void exibirListaReserva(){
 
     }
 
+/*
+ * Metodo responsavel por fazer uma busca no List listaReserva
+ * e fazer a sua impressao na tela 
+ */
     public static void exibirDetalheReserva(){
+        System.out.println("Entre com o cpf do cliente, na qual deseja ver a reserva: ");
+        String cpf = entrada.nextLine();
+        int cont = 0;
+        for (Reserva r: listaReserva){
+            if(r.getCpfCliente().equals(cpf)){
+                System.out.println(r.toString());
+                cont++;
+            }
+        }
+        if(cont == 0){
+            System.out.println("CPF não encontrado");
+        }
 
     }
 
