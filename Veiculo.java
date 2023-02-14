@@ -45,7 +45,7 @@
     //Metodo que retorna a descricao do veiculo
     @Override
     public String toString(){
-        return ("Marca: " + getMarca() + "\nModelo: " + getModelo() + "\nQuantidade Disponivel: " + getDisponivel() + "\nAno de fabricação: " + getAnoFabricacao());
+        return ("Marca: " + getMarca() + "\nModelo: " + getModelo() + "\nQuantidade Disponivel: " + getDisponivel() + "\nAno de fabricação: " + getAnoFabricacao() + "\Nid: " + getId());
     }
     //Metodo referente ao calculo do valor do aluguel, sem implementacao que sera sobrescrito nas subclasses 
     public abstract double calcularAluguel();
