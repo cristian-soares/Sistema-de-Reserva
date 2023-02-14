@@ -6,14 +6,14 @@ public class Sistema {
     private static int tipoUsuario;
     private static List<Veiculo> listaVeiculos = new ArrayList<>();
     private static List<Reserva> listaReserva = new ArrayList<>();
-    private static Scanner entrada;
+    private static Scanner entrada = new Scanner(System.in);
     private static int id;
     private static Veiculo v;
 
     public static void main(String[] args) {
         System.out.println("Bem Vindo!");
         //Carregar as listas do arquivo
-        System.out.println("Eescolha o tipo de usuario (1 - Administrador/ 2 - Cliente): ");
+        System.out.println("Escolha o tipo de usuario (1 - Administrador/ 2 - Cliente): ");
         tipoUsuario = entrada.nextInt();
         switch(tipoUsuario){
             case 1:
@@ -86,7 +86,7 @@ public class Sistema {
     public static void tratarMenuAdm(int opcao){
         switch(opcao){
             case 1:
-            cadastrarVeiculo(v);
+            cadastrarVeiculo();
             break;
             case 2:
             removerVeiculo(id);
@@ -108,16 +108,16 @@ public class Sistema {
             tratarMenuRelatorio(entrada.nextInt());
             break;
             case 8:
-            TratamentoArquivos.salvarListaVeiculos("");
+           // TratamentoArquivos.salvarListaVeiculos("");
             break;
             case 9:
-            TratamentoArquivos.lerArqVeiculos("");
+           // TratamentoArquivos.lerArqVeiculos("");
             break;
             case 10:
-            TratamentoArquivos.salvarListaReserva("");
+          //  TratamentoArquivos.salvarListaReserva("");
             break;
             case 11:
-            TratamentoArquivos.lerArqReservas("");
+           // TratamentoArquivos.lerArqReservas("");
             break;
             case 12:
             break;
@@ -167,26 +167,48 @@ public class Sistema {
         
     }
 
+    public static Veiculo dadosVeiculo(){
+        Veiculo v;
+        System.out.println("Qual veiculo sera adicionado? (1 - Carro / 2 - Moto / 3 - Van)");
+        if (entrada.nextInt() == 1){
+        System.out.println("Marca: ");
+        String m = entrada.nextLine();
+        System.out.println("Modelo: ");
+        String mo = entrada.nextLine();
+        System.out.println("Ano Fabricacao: ");
+        String m = entrada.nextLine();
+        System.out.println("Modelo: ");
+        String mo = entrada.nextLine();
 
+           //return v = new Carro(m,);
+        }
+        if (entrada.nextInt() == 2){
+        return v = new Moto();
+        }
+        return v = new Van();
+    }
 
-    public static void cadastrarVeiculo(Veiculo v){
-        listaVeiculos.add(v);
+    public static void cadastrarVeiculo(){
+        listaVeiculos.add(dadosVeiculo());
+    }
+
+    public static Veiculo buscarIdVeiculo(int id){
+        for (Veiculo veiculo : listaVeiculos) {
+            if (id == veiculo.getId()){
+              return veiculo;  
+            } 
+        }
+        return null;
     }
 
     public static void removerVeiculo(int id){
-        int cont=0;
-        for (Veiculo veiculo : listaVeiculos) {
-            if (id == veiculo.getId()){
-                listaVeiculos.remove(veiculo);
-                System.out.println("Veiculo removido ");
-                cont++;
-            } 
-        }
-        if (cont == 0){
+        if ( buscarIdVeiculo(id) == null){
             System.out.println("Veiculo nao encontrado ");
         }
+        else {
+            listaVeiculos.remove(buscarIdVeiculo(id));
+        }
         
-        //listaVeiculos.remove(v);
     }
 
     public static void exibirListaReserva(){
