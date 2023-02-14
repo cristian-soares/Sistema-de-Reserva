@@ -171,21 +171,58 @@ public class Sistema {
         Veiculo v;
         System.out.println("Qual veiculo sera adicionado? (1 - Carro / 2 - Moto / 3 - Van)");
         if (entrada.nextInt() == 1){
-        System.out.println("Marca: ");
-        String m = entrada.nextLine();
-        System.out.println("Modelo: ");
-        String mo = entrada.nextLine();
-        System.out.println("Ano Fabricacao: ");
-        String m = entrada.nextLine();
-        System.out.println("Modelo: ");
-        String mo = entrada.nextLine();
-
-           //return v = new Carro(m,);
+            System.out.println("e automatico?: 1 - Sim / 2 - Nao ");
+            boolean aut;
+            if (entrada.nextInt() == 1){
+                aut = true;
+            }else aut = false;
+            System.out.println("Qual o valor de entrada: ");
+            double ve = entrada.nextDouble();
+            return v = new Carro(lerMarca(),lerModelo(), true, lerAno(),lerKmRodados(),LerId(),aut,ve);
         }
         if (entrada.nextInt() == 2){
-        return v = new Moto();
+            System.out.println("Numero de marchas: ");
+            int marchas = entrada.nextInt();
+            System.out.println("Categoria: (ex: Street · Scooter · Trail · Naked · Sport)");
+            String cat = entrada.nextLine();
+
+            return v = new Moto(lerMarca(),lerModelo(), true, lerAno(),lerKmRodados(),LerId(),marchas,cat);
         }
-        return v = new Van();
+        
+        System.out.println("Possui porta Automatica?: 1 - Sim / 2 - Nao ");
+        boolean aut;
+        if (entrada.nextInt() == 1){
+            aut = true;
+        }else aut = false;
+        System.out.println("Numero de assentos: ");
+        int nA = entrada.nextInt();
+
+        return v = new Van(lerMarca(),lerModelo(), true, lerAno(),lerKmRodados(),LerId(),nA,aut);
+    }
+
+    public static String lerMarca(){
+        System.out.println("Marca: ");
+        return entrada.nextLine();
+    }
+
+    public static double lerKmRodados(){
+        System.out.println("Km Rodados: ");
+        return entrada.nextDouble();
+    }
+
+    public static String lerModelo(){
+        System.out.println("Modelo: ");
+        return entrada.nextLine();
+    }
+
+    public static int lerAno(){
+        System.out.println("Ano Fabricacao: ");
+        return entrada.nextInt();
+    } 
+
+    public static int LerId(){
+        System.out.println("Id: ");
+        return entrada.nextInt();
     }
 
     public static void cadastrarVeiculo(){
