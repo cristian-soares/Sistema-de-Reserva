@@ -13,7 +13,7 @@ public class Sistema {
     public static void main(String[] args) {
         System.out.println("Bem Vindo!");
         //Carregar as listas do arquivo
-        System.out.println("Eescolha o tipo de usuario (1 - Administrador/ 2 - Cliente): ");
+        System.out.println("Escolha o tipo de usuario (1 - Administrador/ 2 - Cliente): ");
         tipoUsuario = entrada.nextInt();
         switch(tipoUsuario){
             case 1:
