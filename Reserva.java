@@ -2,9 +2,9 @@ public class Reserva {
     private String nomeCliente;
     private String cpfCliente;
     private Veiculo veiculo;
-    private String tempoReserva;
+    private int tempoReserva;
 
-    public Reserva(String nomeCliente, String cpf ,Veiculo veiculo, String tempoReserva){
+    public Reserva(String nomeCliente, String cpf ,Veiculo veiculo, int tempoReserva){
         this.nomeCliente = nomeCliente;
         this.cpfCliente = cpf;
         this.veiculo = veiculo;
@@ -23,7 +23,7 @@ public class Reserva {
         return veiculo;
     }
 
-    public String getTempoReserva(){
+    public int getTempoReserva(){
         return tempoReserva;
     }
 
