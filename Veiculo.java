@@ -39,7 +39,7 @@
         return kmRodados;
     }
     //Metodo que retorna o id
-    public double getId() {
+    public int getId() {
         return id;
     }
     //Metodo que retorna a descricao do veiculo
