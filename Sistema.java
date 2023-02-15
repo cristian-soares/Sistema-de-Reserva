@@ -9,6 +9,7 @@ public class Sistema {
     private static Scanner entrada = new Scanner(System.in);
     private static int id;
     private static Veiculo v;
+    private static Reserva r;
 
     public static void main(String[] args) {
         System.out.println("Bem Vindo!");
@@ -71,6 +72,7 @@ public class Sistema {
             exibirDetalheVeiculoCliente();
             break;
             case 3:
+            exibirListaVeiculoCliente();
             fazerReserva();
             break;
             case 4:
@@ -168,7 +170,6 @@ public class Sistema {
     }
 
     public static Veiculo dadosVeiculo(){
-        Veiculo v;
         System.out.println("Qual veiculo sera adicionado? (1 - Carro / 2 - Moto / 3 - Van)");
         if (entrada.nextInt() == 1){
             System.out.println("e automatico?: 1 - Sim / 2 - Nao ");
@@ -247,9 +248,9 @@ public class Sistema {
         }
         
     }
-
+////////////////////////////////////
     public static void exibirListaReserva(){
-     
+        
     }
 
 /*
@@ -279,41 +280,92 @@ public class Sistema {
     }
 
     public static void exibirDetalheVeiculoADM(){
-       
+        int id;
+        int contador=0;
+        System.out.println("Digite o Id do veiculo desejado: ");
+        id = entrada.nextInt();
+        for(Veiculo v: listaVeiculos) {
+            if(v.getId() == id) {
+                System.out.println(v);
+                contador++;
+            }
+        }
+        if(contador==0) {
+            System.out.println("Numero de Id inexistente");    
+        }
     }
 
+    //verifica quais veiculos tem o atributo "disponivel" = true, antes de exibir
+    //alguns atributos 
     public static void exibirListaVeiculoCliente(){
-        //verifica quais veiculos tem o atributo "disponivel" = true, antes de exibir
-        //alguns atributos 
+        
     }
-
+        
+    //verifica quais veiculos tem o atributo "disponivel" = true, antes de exibir 
+    //tds os atributos
     public static void exibirDetalheVeiculoCliente(){
-        //verifica quais veiculos tem o atributo "disponivel" = true, antes de exibir 
-        //tds os atributos
+        int i;
+        System.out.println("Entre com o id do veiculo para saber detalhes:");
+        i = entrada.nextInt();
+        for(Veiculo v: listaVeiculos){
+           if(v.getId() == i){
+               System.out.println(v);
+           }
+           else{
+               System.out.println(" Veiculo não encontrado");
+           }
+       }
     }
 
     public static void fazerReserva(){
-          /*ler o id do veiculo, 
-            conferir se existe
-            passar parametros 
-            cria obj reserva
-        add na lista 
-            */
-       
+        v = lerVeiculo();
+        if(v == null){
+            System.out.println("Veiculo nao encontrado");
+        }else{
+            r = new Reserva(lerNomeCliente(),lerCpf(), v, lerTempoReserva());
+        }
+        
+     }
 
+
+    public static String lerNomeCliente(){
+        System.out.println("Digite seu nome:");
+        return entrada.nextLine();
     }
 
-    public static void cancelarReserva(){
-        /*ler o cpf do cliente, 
-        conferir se existe
-            */
-
-        //percorre a lista de reservas pelo cpf
-        //verifica o tempo de reserva
-        //exclui a reserva se possivel
-
+    public static String lerCpf(){
+        System.out.println("Digite o CPF: ");
+        return entrada.nextLine();
     }
 
+    public static Veiculo lerVeiculo(){
+        System.out.println("Digite o Id do Veiculo desejado: ");
+        int i;
+        i = entrada.nextInt();
+        return buscarIdVeiculo(i); 
+    }
+
+    public static int lerTempoReserva(){
+        System.out.println("Digite o Tempo que deseja reservar: ");
+        return entrada.nextInt();
+    }
+
+
+     public static void cancelarReserva(){ // verificar o tempo
+         System.out.println("Entre com o numero do CPF utilizado na reserva:");
+         String cpf = entrada.nextLine();
+         int cont = 0;
+         for(Reserva rv: listaReserva){
+             if(rv.getCpfCliente().equals(cpf)){
+                 listaReserva.remove(rv);
+                 System.out.println("Reserva Removida com sucesso");
+                 cont = 1;
+             }
+         }
+         if(cont == 0){
+            System.out.println("CPF não encontrado");
+        }
+     }
     //Adicionar na classe veiculo um Id, para fazer as pesquisas relacionadas atraves dele
     //como o cliente escolher qual alugar
 
