@@ -3,19 +3,19 @@ import java.util.ArrayList;
 import java.io.*;
 
 public class TratamentoArquivos {
-    private static List<Reserva> r;
-    private static List<Veiculo> v;
     private static Reserva reserva;
     private static Veiculo veiculo;
 
     public static List<Reserva> lerArqReservas(String nomeArq){
-        r = new ArrayList<>();
+        List<Reserva> r = new ArrayList<>();
         try (BufferedReader arq = new BufferedReader(new FileReader(nomeArq))){
             String linha = arq.readLine();
 
             while(linha != null){
                 String[] campos = linha.split(",");
-                 reserva = new Reserva(campos[0],campos[1],campos[2],campos[3]);
+                int tipo = retornaTipoVeiculo(campos[5]);
+                veiculo = criarVeiculo(campos, tipo);
+                 reserva = new Reserva(veiculo,campos[8],campos[9],Integer.parseInt(campos[10]));
                 r.add(reserva);
 
                 linha = arq.readLine();
@@ -26,37 +26,26 @@ public class TratamentoArquivos {
         return r;
     }
 
-    public static void salvarListaReserva(String nomeArq){
+    public static void salvarListaReserva(String nomeArq, List<Reserva> reserva){
         try(FileWriter arq = new FileWriter(nomeArq)) {
-            for(Reserva reserva: r){
-                arq.write();
+            for(Reserva reservas: reserva){
+                arq.write(stringVeiculo(reservas.getVeiculo()) + "," + reservas.getNomeCliente() + "," + reservas.getCpfCliente() + "," + reservas.getTempoReserva());
             }
         } catch (IOException e) {
-            System.out.println("Falha ao salvar no arquivo " + nomeArq);
+            System.out.println("Falha ao salvar no arquivo" + nomeArq);
         }
     }
 
      public static List<Veiculo> lerArqVeiculos(String nomeArq){
-        v = new ArrayList<>();
+        List<Veiculo> v = new ArrayList<>();
         try (BufferedReader arq = new BufferedReader(new FileReader(nomeArq))){
             String linha = arq.readLine();
 
             while(linha != null){
                 String[] campos = linha.split(",");
-                int tipo = retornaTipoVeiculo(campos[5]);
 
-                if(tipo == 1)//Carro
-                    veiculo = new Carro(campos[0],campos[1],Boolean.parseBoolean(campos[2]),Integer.parseInt(campos[3]),Double.parseDouble(campos[4]),
-                    campos[5],Boolean.parseBoolean(campos[6]),Double.parseDouble(campos[7]));
-                
-                if(tipo == 2){
-                    veiculo = new Moto(campos[0],campos[1],Boolean.parseBoolean(campos[2]),Integer.parseInt(campos[3]),Double.parseDouble(campos[4]),
-                    campos[5],Integer.parseInt(campos[6]),campos[7]);
-                }
-                if (tipo == 3){
-                    veiculo = new Van(campos[0],campos[1],Boolean.parseBoolean(campos[2]),Integer.parseInt(campos[3]),Double.parseDouble(campos[4]),
-                    campos[5],Integer.parseInt(campos[6]),Boolean.parseBoolean(campos[7]));
-                }
+                int tipo = retornaTipoVeiculo(campos[5]);
+                veiculo = criarVeiculo(campos, tipo);
                 v.add(veiculo);
 
                 linha = arq.readLine();
@@ -68,14 +57,29 @@ public class TratamentoArquivos {
         return v;
     } 
 
-    public static void salvarListaVeiculos(String nomeArq){
+    public static void salvarListaVeiculos(String nomeArq, List<Veiculo> v){
         try(FileWriter arq = new FileWriter(nomeArq)) {
-            for(Veiculo veiculos: v){
-                arq.write(veiculos.ge);
+            for(var veiculos: v){
+                arq.write(stringVeiculo(veiculos));
             }
         } catch (IOException e) {
             System.out.println("Falha ao salvar no arquivo " + nomeArq);
         }
+    }
+
+    private static String stringVeiculo(Veiculo veiculos){
+        if(veiculos instanceof Carro){
+            Carro carro = (Carro) veiculos;
+            return (veiculos.getMarca()+ "," + veiculos.getModelo()+ "," + veiculos.getDisponivel()+ "," + veiculos.getAnoFabricacao()+ ","+ veiculos.getKmRodados()+ ","+veiculos.getId()+ "," + carro.getEhAutomatico()+ "," + carro.getValorEntrada());
+        }
+        else if(veiculos instanceof Moto){
+            Moto moto = (Moto) veiculos;
+            return (veiculos.getMarca()+ "," + veiculos.getModelo()+ "," + veiculos.getDisponivel()+ "," + veiculos.getAnoFabricacao()+ ","+ veiculos.getKmRodados()+ ","+veiculos.getId()+ "," + moto.getNumeroDeMarchas()+ "," + moto.getCategoria());
+        }
+
+        Van van = (Van) veiculos;
+        return (veiculos.getMarca()+ "," + veiculos.getModelo()+ "," + veiculos.getDisponivel()+ "," + veiculos.getAnoFabricacao()+ ","+ veiculos.getKmRodados()+ ","+veiculos.getId()+ "," + van. getNumeroDeAssentos()+ "," + van.getPossuiPortaAutomatica());
+        
     }
 
     private static int retornaTipoVeiculo(String id){
@@ -86,6 +90,24 @@ public class TratamentoArquivos {
             return 2;
         }
         return 3;
+    }
+
+    private static Veiculo criarVeiculo(String[] campos, int tipo){
+
+        if(tipo == 1)//Carro
+        veiculo = new Carro(campos[0],campos[1],Boolean.parseBoolean(campos[2]),Integer.parseInt(campos[3]),Double.parseDouble(campos[4]),
+        campos[5],Boolean.parseBoolean(campos[6]),Double.parseDouble(campos[7]));
+    
+        if(tipo == 2){//moto
+        veiculo = new Moto(campos[0],campos[1],Boolean.parseBoolean(campos[2]),Integer.parseInt(campos[3]),Double.parseDouble(campos[4]),
+        campos[5],Integer.parseInt(campos[6]),campos[7]);
+        }
+        if (tipo == 3){
+        veiculo = new Van(campos[0],campos[1],Boolean.parseBoolean(campos[2]),Integer.parseInt(campos[3]),Double.parseDouble(campos[4]),
+        campos[5],Integer.parseInt(campos[6]),Boolean.parseBoolean(campos[7]));
+        }
+
+        return veiculo;
     }
 
 }
