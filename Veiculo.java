@@ -42,6 +42,10 @@
     public String getId() {
         return id;
     }
+    //metodo que altera o valor do atributo disponivel
+    public void setDisponivel(boolean dis){
+        disponivel = dis;
+    }
     //Metodo que retorna a descricao do veiculo
     @Override
     public String toString(){

@@ -51,7 +51,7 @@ public class Sistema {
         System.out.println("4 - Ver detalhes de um veiculo especifico");//nicholas
         System.out.println("5 - Ver lista completa de reservas"); //nicholas
         System.out.println("6 - Ver detalhes de uma reserva especifica"); //duda
-        System.out.println("7 - Visualizar Relatorio"); //duda
+        System.out.println("7 - Visualizar Relatorios"); //duda
         System.out.println("8 - Salvar a lista de veiculos");
         System.out.println("9 - Carregar a lista de veiculos"); 
         System.out.println("10 - Salvar a lista de reservas");
@@ -136,6 +136,12 @@ public class Sistema {
         System.out.println("1 - Relatorio dos Veiculos reservados");
         System.out.println("2 - Relatorio dos Clientes");
         System.out.println("3 - Voltar"); 
+        /* 
+         * System.out.println("3 - Veiculos mais reservados");
+         * 
+         * novo atributo que controle a quantidade de vezes que o v foi reservado 
+         * exibir a lista ordenada a partir disso
+        */
         System.out.println();
         System.out.println("#############################################"); 
         
@@ -144,7 +150,7 @@ public class Sistema {
     public static void tratarMenuRelatorio(int opcao){
         switch(opcao){
 
-            
+
 ///////////////////      VOLTAR AQUI
 
 
@@ -325,8 +331,9 @@ public static void exibirListaReserva(){
         if(v == null){
             System.out.println("Veiculo nao encontrado");
         }else{
-           Reserva r = new Reserva(v,lerNomeCliente(),lerCpf(), lerTempoReserva());
-           listaReserva.add(r);
+            v.setDisponivel(false); 
+            Reserva r = new Reserva(v,lerNomeCliente(),lerCpf(), lerTempoReserva());
+            listaReserva.add(r);
         }
         
      }
@@ -364,6 +371,7 @@ public static void exibirListaReserva(){
                  listaReserva.remove(rv);
                  System.out.println("Reserva Removida com sucesso");
                  cont = 1;
+                 v.setDisponivel(true);
              }
          }
          if(cont == 0){
