@@ -4,7 +4,7 @@ public class Moto extends Veiculo
     private int numeroDeMarchas;
     private String categoria; //ex: 1-Street · 2- Scooter · 3- Trail · 4- Naked · 5- Sport
     
-    public Moto(String marca, String modelo, boolean disponivel, int anoFabricacao,double kmRodados,int id, int numeroDeMarchas, String categoria) {
+    public Moto(String marca, String modelo, boolean disponivel, int anoFabricacao,double kmRodados,String id, int numeroDeMarchas, String categoria) {
         super(marca, modelo, disponivel, anoFabricacao, kmRodados,id);
         this.numeroDeMarchas = numeroDeMarchas;
         this.categoria = categoria;

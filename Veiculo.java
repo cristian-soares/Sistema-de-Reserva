@@ -5,10 +5,10 @@
         private boolean disponivel;
         private int anoFabricacao;
         private double kmRodados;
-        private int id;
+        private String id;
   
     //Construtor da classe
-    public Veiculo(String marca, String modelo, Boolean disponivel, int anoFabricacao, double kmRodados, int id){
+    public Veiculo(String marca, String modelo, Boolean disponivel, int anoFabricacao, double kmRodados, String id){
         this.marca = marca;
         this.modelo = modelo;
         this.disponivel = disponivel;
@@ -39,7 +39,7 @@
         return kmRodados;
     }
     //Metodo que retorna o id
-    public int getId() {
+    public String getId() {
         return id;
     }
     //Metodo que retorna a descricao do veiculo

@@ -4,7 +4,7 @@
         private double valorEntrada; 
         
     //Construtor da classe 
-    public Carro(String marca, String modelo, boolean disponivel, int anoFabricacao,double kmRodados,int id, boolean ehAutomatico, double valorEntrada){
+    public Carro(String marca, String modelo, boolean disponivel, int anoFabricacao,double kmRodados,String id, boolean ehAutomatico, double valorEntrada){
         super(marca, modelo, disponivel, anoFabricacao, kmRodados,id);
         this.ehAutomatico = ehAutomatico;
         this.valorEntrada = valorEntrada;
