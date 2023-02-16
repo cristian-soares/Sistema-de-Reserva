@@ -108,16 +108,16 @@ public class Sistema {
             tratarMenuRelatorio(entrada.nextInt());
             break;
             case 8:
-           // TratamentoArquivos.salvarListaVeiculos("");
+            TratamentoArquivos.salvarListaVeiculos("",listaVeiculos);
             break;
             case 9:
-           // TratamentoArquivos.lerArqVeiculos("");
+            TratamentoArquivos.lerArqVeiculos("");
             break;
             case 10:
-          //  TratamentoArquivos.salvarListaReserva("");
+            TratamentoArquivos.salvarListaReserva("",listaReserva);
             break;
             case 11:
-           // TratamentoArquivos.lerArqReservas("");
+            TratamentoArquivos.lerArqReservas("");
             break;
             case 12:
             break;
@@ -326,7 +326,7 @@ public static void exibirListaReserva(){
         if(v == null){
             System.out.println("Veiculo nao encontrado");
         }else{
-           Reserva r = new Reserva(lerNomeCliente(),lerCpf(), v, lerTempoReserva());
+           Reserva r = new Reserva(v,lerNomeCliente(),lerCpf(), lerTempoReserva());
            listaReserva.add(r);
         }
         
@@ -356,7 +356,7 @@ public static void exibirListaReserva(){
     }
 
 
-     public static void cancelarReserva(){ // verificar o tempo
+     public static void cancelarReserva(){ 
          System.out.println("Entre com o numero do CPF utilizado na reserva:");
          String cpf = entrada.nextLine();
          int cont = 0;
