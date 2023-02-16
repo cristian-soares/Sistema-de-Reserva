@@ -7,10 +7,8 @@ public class Sistema {
     private static List<Veiculo> listaVeiculos = new ArrayList<>();
     private static List<Reserva> listaReserva = new ArrayList<>();
     private static Scanner entrada = new Scanner(System.in);
-    private static int id;
+    private static String id;
     private static Veiculo v;
-    private static Reserva r;
-
     public static void main(String[] args) {
         System.out.println("Bem Vindo!");
         //Carregar as listas do arquivo
@@ -221,26 +219,26 @@ public class Sistema {
         return entrada.nextInt();
     } 
 
-    public static int LerId(){
+    public static String LerId(){
         System.out.println("Id: ");
-        return entrada.nextInt();
+        return entrada.nextLine();
     }
 
     public static void cadastrarVeiculo(){
         listaVeiculos.add(dadosVeiculo());
     }
 
-    public static Veiculo buscarIdVeiculo(int id){
+    public static Veiculo buscarIdVeiculo(String id){
         for (Veiculo veiculo : listaVeiculos) {
-            if (id == veiculo.getId()){
+            if (id.equals(veiculo.getId())){
               return veiculo;  
             } 
         }
         return null;
     }
 
-    public static void removerVeiculo(int id){
-        if ( buscarIdVeiculo(id) == null){
+    public static void removerVeiculo(String id){
+        if ( buscarIdVeiculo(id).equals(null)){
             System.out.println("Veiculo nao encontrado ");
         }
         else {
@@ -249,9 +247,12 @@ public class Sistema {
         
     }
 ////////////////////////////////////
-    public static void exibirListaReserva(){
-        
+public static void exibirListaReserva(){
+    for(Reserva r: listaReserva) {
+        System.out.println("Nome: " + r.getNomeCliente());
+        System.out.println("Tempo de reserva: " + r.getTempoReserva());
     }
+}
 
 /*
  * Metodo responsavel por fazer uma busca no List listaReserva
@@ -280,12 +281,11 @@ public class Sistema {
     }
 
     public static void exibirDetalheVeiculoADM(){
-        int id;
         int contador=0;
         System.out.println("Digite o Id do veiculo desejado: ");
-        id = entrada.nextInt();
+        id = entrada.nextLine();
         for(Veiculo v: listaVeiculos) {
-            if(v.getId() == id) {
+            if(v.getId().equals(id)) {
                 System.out.println(v);
                 contador++;
             }
@@ -298,17 +298,21 @@ public class Sistema {
     //verifica quais veiculos tem o atributo "disponivel" = true, antes de exibir
     //alguns atributos 
     public static void exibirListaVeiculoCliente(){
-        
+        for(Veiculo v: listaVeiculos) {
+            if(v.getDisponivel()==true) {
+                System.out.println(v);
+            }
+        }
     }
         
     //verifica quais veiculos tem o atributo "disponivel" = true, antes de exibir 
     //tds os atributos
     public static void exibirDetalheVeiculoCliente(){
-        int i;
+        String i;
         System.out.println("Entre com o id do veiculo para saber detalhes:");
-        i = entrada.nextInt();
+        i = entrada.nextLine();
         for(Veiculo v: listaVeiculos){
-           if(v.getId() == i){
+           if(v.getId().equals(i)){
                System.out.println(v);
            }
            else{
@@ -322,7 +326,8 @@ public class Sistema {
         if(v == null){
             System.out.println("Veiculo nao encontrado");
         }else{
-            r = new Reserva(lerNomeCliente(),lerCpf(), v, lerTempoReserva());
+           Reserva r = new Reserva(lerNomeCliente(),lerCpf(), v, lerTempoReserva());
+           listaReserva.add(r);
         }
         
      }
@@ -340,8 +345,8 @@ public class Sistema {
 
     public static Veiculo lerVeiculo(){
         System.out.println("Digite o Id do Veiculo desejado: ");
-        int i;
-        i = entrada.nextInt();
+        String i;
+        i = entrada.nextLine();
         return buscarIdVeiculo(i); 
     }
 
