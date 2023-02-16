@@ -134,9 +134,8 @@ public class Sistema {
         System.out.println();
         System.out.println("Escolha uma das opcoes a seguir:"); 
         System.out.println("1 - Relatorio dos Veiculos reservados");
-        System.out.println("2 - Relatorio das Reservas");
-        System.out.println("3 - Relatorio dos Clientes");
-        System.out.println("4 - Voltar"); 
+        System.out.println("2 - Relatorio dos Clientes");
+        System.out.println("3 - Voltar"); 
         System.out.println();
         System.out.println("#############################################"); 
         
@@ -144,22 +143,22 @@ public class Sistema {
 
     public static void tratarMenuRelatorio(int opcao){
         switch(opcao){
-            case 1:
-            for (Veiculo v: listaVeiculos){
-                if(!v.getDisponivel()){
-                    System.out.println(v);
-                }
+
+            
+///////////////////      VOLTAR AQUI
+
+
+            case 1://Mostrar junto o tempo de reserva 
+            for (Reserva r: listaReserva){
+                System.out.println(r.getVeiculo() + " " + r.getTempoReserva());
             }
             break;
             case 2:
-            exibirListaReserva();
-            break;
-            case 3:
             for (Reserva r: listaReserva){
                 System.out.println("Cliente: " + r.getNomeCliente() + "/nCPF: "+ r.getCpfCliente());
             }
             break;
-            case 4:
+            case 3:
             return;
             default:
             System.out.println("opcao invalida");
