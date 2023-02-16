@@ -4,7 +4,7 @@ public class Reserva {
     private Veiculo veiculo;
     private int tempoReserva;
 
-    public Reserva(String nomeCliente, String cpf ,Veiculo veiculo, int tempoReserva){
+    public Reserva(Veiculo veiculo, String nomeCliente, String cpf , int tempoReserva){
         this.nomeCliente = nomeCliente;
         this.cpfCliente = cpf;
         this.veiculo = veiculo;
