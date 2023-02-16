@@ -11,6 +11,10 @@ public class TratamentoArquivos {
         try (BufferedReader arq = new BufferedReader(new FileReader(nomeArq))){
             String linha = arq.readLine();
 
+            if(linha == null){
+                System.out.println("Arquivo vazio");
+            }
+
             while(linha != null){
                 String[] campos = linha.split(",");
                 int tipo = retornaTipoVeiculo(campos[5]);
@@ -40,6 +44,10 @@ public class TratamentoArquivos {
         List<Veiculo> v = new ArrayList<>();
         try (BufferedReader arq = new BufferedReader(new FileReader(nomeArq))){
             String linha = arq.readLine();
+
+            if(linha == null){
+                System.out.println("Arquivo vazio");
+            }
 
             while(linha != null){
                 String[] campos = linha.split(",");
