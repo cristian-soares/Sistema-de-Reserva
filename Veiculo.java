@@ -54,8 +54,9 @@
     public void setDisponivel(boolean dis){
         disponivel = dis;
     }
-    /**Método que retorna a descrição do veículo 
-    *@author Caroline*/
+    /**Método que retorna busca um veiculo pelo id 
+    *@author Caroline
+    *@param id - inteiro que diferencia os veículos*/
     public Veiculo buscarVeiculo(int id){
         if(getId() = id){
             return veiculo;
