@@ -56,6 +56,17 @@
     }
     /**Método que retorna a descrição do veículo 
     *@author Caroline*/
+    public Veiculo buscarVeiculo(int id){
+        if(getId() = id){
+            return veiculo;
+        }
+        else{
+            System.out.println("Veículo não encontrado, verifique o ID")
+        }
+    }
+
+    /**Método que retorna a descrição do veículo 
+    *@author Caroline*/
     @Override
     public String toString(){
         return ("Marca: " + getMarca() + "\nModelo: " + getModelo() + "\nQuantidade Disponivel: " + getDisponivel() + "\nAno de fabricação: " + getAnoFabricacao()+ "\nID: " + getId);
