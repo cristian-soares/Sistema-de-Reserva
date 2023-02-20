@@ -19,7 +19,7 @@ public class TratamentoArquivos {
                 String[] campos = linha.split(",");
                 int tipo = retornaTipoVeiculo(campos[5]);
                 veiculo = criarVeiculo(campos, tipo);
-                 reserva = new Reserva(veiculo,campos[8],campos[9],Integer.parseInt(campos[10]));
+                 reserva = new Reserva(veiculo,campos[8],campos[9],campos[10],Integer.parseInt(campos[11]));
                 r.add(reserva);
 
                 linha = arq.readLine();
