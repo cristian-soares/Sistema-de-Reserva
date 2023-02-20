@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Collections;
+import java.util.Calendar;
 
 public class Sistema {
     private static int tipoUsuario;
@@ -14,14 +16,19 @@ public class Sistema {
         //Carregar as listas do arquivo
         System.out.println("Escolha o tipo de usuario (1 - Administrador/ 2 - Cliente): ");
         tipoUsuario = entrada.nextInt();
+        int sair = 0;
         switch(tipoUsuario){
             case 1:
-            gerarMenuAdm();
-            tratarMenuAdm(entrada.nextInt());            
+            do{
+                gerarMenuAdm();
+                sair = tratarMenuAdm(entrada.nextInt());  
+            }while(sair == 0);        
             break;
             case 2:
-            gerarMenuCliente();
-            tratarMenuCliente(entrada.nextInt());
+            do{
+                gerarMenuCliente();
+                sair = tratarMenuCliente(entrada.nextInt());
+            }while(sair == 0); 
             break;
             default:
             System.out.println("opcao invalida");
@@ -61,70 +68,75 @@ public class Sistema {
         System.out.println("###############################################"); 
     }
 
-    public static void tratarMenuCliente(int opcao){
+    public static int tratarMenuCliente(int opcao){
         switch(opcao){
             case 1:
             exibirListaVeiculoCliente();
-            break;
+            return 1;
             case 2:
             exibirDetalheVeiculoCliente();
-            break;
+            return 1;
             case 3:
             exibirListaVeiculoCliente();
             fazerReserva();
-            break;
+            return 1;
             case 4:
             cancelarReserva();
-            break;
+            return 1;
             case 5:
-            return;
+            return 0;
+    
             default:
-            System.out.println("Opcao invalida");
+            System.out.println("Opcao invalida ");
+            System.out.println("Digite uma opcao valida: ");
+            return 1;
         }
     }
 
-    public static void tratarMenuAdm(int opcao){
+    public static int tratarMenuAdm(int opcao){
         switch(opcao){
             case 1:
             cadastrarVeiculo();
-            break;
+            return 1;
             case 2:
             removerVeiculo(id);
-            break;
+            return 1;
             case 3:
             exibirListaVeiculoADM();
-            break;
+            return 1;
             case 4:
             exibirDetalheVeiculoADM();
-            break;
+            return 1;
             case 5:
             exibirListaReserva();
-            break;
+            return 1;
             case 6:
             exibirDetalheReserva();
-            break;
+            return 1;
             case 7:
             menuRelatorio();
             tratarMenuRelatorio(entrada.nextInt());
-            break;
+            return 1;
             case 8:
-            TratamentoArquivos.salvarListaVeiculos("",listaVeiculos);
-            break;
+            TratamentoArquivos.salvarListaVeiculos("",getListaVeiculo());
+            return 1;
             case 9:
             TratamentoArquivos.lerArqVeiculos("");
-            break;
+            return 1;
             case 10:
-            TratamentoArquivos.salvarListaReserva("",listaReserva);
-            break;
+            TratamentoArquivos.salvarListaReserva("",getListaReservas());
+            return 1;
             case 11:
             TratamentoArquivos.lerArqReservas("");
-            break;
+            return 1;
             case 12:
-            break;
-
+            return 0;
+            
             default:
             System.out.println("Opcao invalida");
-            break;
+           
+            System.out.println("Digite uma opcao valida: ");
+            return 1;
         }
 
     }  
@@ -171,6 +183,53 @@ public class Sistema {
         }
         
     }
+
+    public static List<Reserva> getListaReservas(){
+        return Collections.unmodifiableList(listaReserva);
+    }
+
+    public static List<Veiculo> getListaVeiculo(){
+        return Collections.unmodifiableList(listaVeiculos);
+    }
+///////////////////// TRATAR TEMPO RESERVA /////////////////////////////
+
+/*public static boolean compararData(){
+    Calendar c = Calendar.getInstance();
+    String d = reserva.getTempoReserva();
+    String[] data = d.split("/");
+
+    //converter string int?
+    if(data[1] >= (c.get(Calendar.MONTH))){
+        if(data[0] > (c.get(Calendar.DAY_OF_MONTH))){
+            return true;
+        }
+        return false;   
+    }
+    return false;
+}
+*/
+public static boolean compararData(String data) {
+    Calendar c = Calendar.getInstance(); 
+    String[] dat = data.split("/");
+    int dia;
+    int j;
+    int mes;
+    int i;
+    
+    dia = Integer.parseInt(dat[0]);
+    mes = Integer.parseInt(dat[1]);
+    
+    j=c.get(Calendar.DAY_OF_MONTH);
+    i=c.get(Calendar.MONTH);
+    
+    if(mes>=i) {
+        if(dia>j) {
+            return true;
+        }
+        return false;
+    }
+    return false;
+}
 
     public static Veiculo dadosVeiculo(){
         System.out.println("Qual veiculo sera adicionado? (1 - Carro / 2 - Moto / 3 - Van)");
@@ -255,7 +314,8 @@ public class Sistema {
 public static void exibirListaReserva(){
     for(Reserva r: listaReserva) {
         System.out.println("Nome: " + r.getNomeCliente());
-        System.out.println("Tempo de reserva: " + r.getTempoReserva());
+        System.out.println("Tempo de reserva: " + r.getTempoReserva() + " dias");
+
     }
 }
 
@@ -328,11 +388,28 @@ public static void exibirListaReserva(){
 
     public static void fazerReserva(){
         v = lerVeiculo();
+        int t = lerTempoReserva();
+        String d = lerDataInicio();
+        boolean check = false;
+        while(check == false){
+        if (verificarTempoValido(t) && compararData(d)){
+            check = true;
+        } else {
+            if (verificarTempoValido(t) == false){
+                System.out.println("Tempo de Reserva inválido, insira outro tempo: ");
+                lerTempoReserva();
+            }
+            if (compararData(d)== false){
+                System.out.println("Data inválida, insira outra data: ");
+                lerDataInicio();
+            }
+        }
+    }
         if(v == null){
             System.out.println("Veiculo nao encontrado");
         }else{
             v.setDisponivel(false); 
-            Reserva r = new Reserva(v,lerNomeCliente(),lerCpf(), lerTempoReserva());
+            Reserva r = new Reserva(v,lerNomeCliente(),lerCpf(),d,t);
             listaReserva.add(r);
         }
         
@@ -361,6 +438,17 @@ public static void exibirListaReserva(){
         return entrada.nextInt();
     }
 
+    public static String lerDataInicio(){
+        System.out.println("Digite a Data para Inicio da Reserva: exemplo(DD/MM)");
+        return entrada.nextLine();
+    } 
+
+    public static boolean verificarTempoValido(int tempo){
+        if (tempo > 7){
+            return false;
+        }
+            return true;
+    }
 
      public static void cancelarReserva(){ 
          System.out.println("Entre com o numero do CPF utilizado na reserva:");
