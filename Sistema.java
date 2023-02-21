@@ -233,7 +233,9 @@ public static boolean compararData(String data) {
 
     public static Veiculo dadosVeiculo(){
         System.out.println("Qual veiculo sera adicionado? (1 - Carro / 2 - Moto / 3 - Van)");
-        if (entrada.nextInt() == 1){
+        int i = entrada.nextInt();
+        if (i == 1){
+            
             System.out.println("e automatico?: 1 - Sim / 2 - Nao ");
             boolean aut;
             if (entrada.nextInt() == 1){
@@ -241,9 +243,11 @@ public static boolean compararData(String data) {
             }else aut = false;
             System.out.println("Qual o valor de entrada: ");
             double ve = entrada.nextDouble();
-            return v = new Carro(lerMarca(),lerModelo(), true, lerAno(),lerKmRodados(),LerId(),aut,ve);
+            
+            return v = new Carro(marca,modelo, true, lerAno(),lerKmRodados(),LerId(),aut,ve);
+        
         }
-        if (entrada.nextInt() == 2){
+        if (i == 2){
             System.out.println("Numero de marchas: ");
             int marchas = entrada.nextInt();
             System.out.println("Categoria: (ex: Street · Scooter · Trail · Naked · Sport)");

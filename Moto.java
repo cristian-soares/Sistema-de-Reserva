@@ -19,7 +19,7 @@ public class Moto extends Veiculo
     }
     
     public String toString() {
-        return super.toString() + "/nNumero de Marchas: " + getNumeroDeMarchas() + "/nCategoria: " + getCategoria();
+        return super.toString() + "\nNumero de Marchas: " + getNumeroDeMarchas() + "\nCategoria: " + getCategoria();
     }
     
     @Override

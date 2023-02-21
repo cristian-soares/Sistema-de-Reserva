@@ -36,7 +36,7 @@ public class Reserva {
 
     @Override 
     public String toString(){
-        return ("Nome cliente" + getNomeCliente() + "/nCPF: " + getCpfCliente() + "/nVeiculo alugado: " + getVeiculo() +"/nData de Inicio da Reserva: "+ getDataInicio() + "/nTempo Reserva: " +getTempoReserva());
+        return ("Nome cliente" + getNomeCliente() + "\nCPF: " + getCpfCliente() + "\nVeiculo alugado: " + getVeiculo() +"\nData de Inicio da Reserva: "+ getDataInicio() + "/nTempo Reserva: " +getTempoReserva());
     }
   
 }

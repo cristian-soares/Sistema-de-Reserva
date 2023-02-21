@@ -18,7 +18,7 @@ public class Van extends Veiculo
     }
     
     public String toString() {
-        return super.toString() + "/nNumero de Assentos: " + getNumeroDeAssentos() + "/nPossui porta automatica: " + getPossuiPortaAutomatica();
+        return super.toString() + "\nNumero de Assentos: " + getNumeroDeAssentos() + "\nPossui porta automatica: " + getPossuiPortaAutomatica();
     }
     
      @Override
