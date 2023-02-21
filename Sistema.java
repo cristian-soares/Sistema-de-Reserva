@@ -1,5 +1,7 @@
+//import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
+//import java.util.Locale;
 import java.util.Scanner;
 import java.util.Collections;
 import java.util.Calendar;
@@ -9,41 +11,51 @@ public class Sistema {
     private static List<Veiculo> listaVeiculos = new ArrayList<>();
     private static List<Reserva> listaReserva = new ArrayList<>();
     private static Scanner entrada = new Scanner(System.in);
+    private static Scanner e;
     private static String id;
     private static Veiculo v;
     public static void main(String[] args) {
         System.out.println("Bem Vindo!");
-        //Carregar as listas do arquivo
-        System.out.println("Escolha o tipo de usuario (1 - Administrador/ 2 - Cliente): ");
-        tipoUsuario = entrada.nextInt();
-        int sair = 0;
-        switch(tipoUsuario){
+        //TratamentoArquivos.lerArqVeiculos("veiculo.txt");
+        int s = 1;
+        while(s == 1){
+            System.out.println("Escolha o tipo de usuario (1 - Administrador/ 2 - Cliente): ");
+            System.out.println("Ou 3 para sair do sistema");
+            tipoUsuario = entrada.nextInt();
+            int sair = 0;
+
+            switch(tipoUsuario){
             case 1:
             do{
                 gerarMenuAdm();
                 sair = tratarMenuAdm(entrada.nextInt());  
-            }while(sair == 0);        
+            }while(sair == 1);      
             break;
             case 2:
             do{
                 gerarMenuCliente();
                 sair = tratarMenuCliente(entrada.nextInt());
-            }while(sair == 0); 
+            }while(sair == 1); 
+            break;
+            case 3:
+            s = 0;
             break;
             default:
             System.out.println("opcao invalida");
-        }
+            }   
+        }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+       
     }
 
     public static void gerarMenuCliente(){
         System.out.println("################ MENU CLIENTE ################");
         System.out.println();
         System.out.println("Escolha uma das opcoes a seguir:"); 
-        System.out.println("1 - Ver lista de veiculos disponiveis"); //nicholas
-        System.out.println("2 - Ver detalhes de um veiculo especifico");//carol
-        System.out.println("3 - Realizar reserva");//carol
-        System.out.println("4 - Cancelar reserva"); //carol
-        System.out.println("5 - Sair");
+        System.out.println("1 - Ver lista de veiculos disponiveis"); 
+        System.out.println("2 - Ver detalhes de um veiculo especifico");
+        System.out.println("3 - Realizar reserva");
+        System.out.println("4 - Cancelar reserva"); 
+        System.out.println("5 - Voltar");
         System.out.println();
         System.out.println("##############################################"); 
     }
@@ -52,18 +64,18 @@ public class Sistema {
         System.out.println("############## MENU ADMINISTRADOR ##############");
         System.out.println();
         System.out.println("Escolha uma das opcoes a seguir:"); 
-        System.out.println("1 - Cadastrar veiculo"); // Cristian
-        System.out.println("2 - Remover veiculo");// Cristian
-        System.out.println("3 - Ver lista completa de veiculos");// Cristian
-        System.out.println("4 - Ver detalhes de um veiculo especifico");//nicholas
-        System.out.println("5 - Ver lista completa de reservas"); //nicholas
-        System.out.println("6 - Ver detalhes de uma reserva especifica"); //duda
-        System.out.println("7 - Visualizar Relatorios"); //duda
+        System.out.println("1 - Cadastrar veiculo"); 
+        System.out.println("2 - Remover veiculo");
+        System.out.println("3 - Ver lista completa de veiculos");
+        System.out.println("4 - Ver detalhes de um veiculo especifico");
+        System.out.println("5 - Ver lista completa de reservas");
+        System.out.println("6 - Ver detalhes de uma reserva especifica");
+        System.out.println("7 - Visualizar Relatorios");
         System.out.println("8 - Salvar a lista de veiculos");
         System.out.println("9 - Carregar a lista de veiculos"); 
         System.out.println("10 - Salvar a lista de reservas");
         System.out.println("11 - Carregar a lista de reservas");
-        System.out.println("12 - Sair");
+        System.out.println("12 - Voltar");
         System.out.println();
         System.out.println("###############################################"); 
     }
@@ -88,7 +100,7 @@ public class Sistema {
     
             default:
             System.out.println("Opcao invalida ");
-            System.out.println("Digite uma opcao valida: ");
+            System.out.println("Digite uma opcao valida");
             return 1;
         }
     }
@@ -99,7 +111,7 @@ public class Sistema {
             cadastrarVeiculo();
             return 1;
             case 2:
-            removerVeiculo(id);
+            removerVeiculo(lerId());
             return 1;
             case 3:
             exibirListaVeiculoADM();
@@ -118,7 +130,7 @@ public class Sistema {
             tratarMenuRelatorio(entrada.nextInt());
             return 1;
             case 8:
-            TratamentoArquivos.salvarListaVeiculos("",getListaVeiculo());
+            TratamentoArquivos.salvarListaVeiculos("veiculo.txt",getListaVeiculo());
             return 1;
             case 9:
             TratamentoArquivos.lerArqVeiculos("");
@@ -135,7 +147,7 @@ public class Sistema {
             default:
             System.out.println("Opcao invalida");
            
-            System.out.println("Digite uma opcao valida: ");
+            System.out.println("Digite uma opcao valida");
             return 1;
         }
 
@@ -191,69 +203,78 @@ public class Sistema {
     public static List<Veiculo> getListaVeiculo(){
         return Collections.unmodifiableList(listaVeiculos);
     }
+
+
+
 ///////////////////// TRATAR TEMPO RESERVA /////////////////////////////
 
-/*public static boolean compararData(){
-    Calendar c = Calendar.getInstance();
-    String d = reserva.getTempoReserva();
-    String[] data = d.split("/");
 
-    //converter string int?
-    if(data[1] >= (c.get(Calendar.MONTH))){
-        if(data[0] > (c.get(Calendar.DAY_OF_MONTH))){
-            return true;
-        }
-        return false;   
-    }
-    return false;
-}
-*/
-public static boolean compararData(String data) {
-    Calendar c = Calendar.getInstance(); 
-    String[] dat = data.split("/");
-    int dia;
-    int j;
-    int mes;
-    int i;
+    public static boolean compararData(String data) { 
+        /* 
+        Locale br = new Locale ("pt", "BR");
+        DateFormat dt = DateFormat.getDateInstance(DateFormat.MONTH_FIELD,br);
+        System.out.println(dt.format(c.getTime()));
+        */
+        Calendar c = Calendar.getInstance(); 
+        String[] dat = data.split("/");
+        int dia;
+        int j;
+        int mes;
+        int i;
     
-    dia = Integer.parseInt(dat[0]);
-    mes = Integer.parseInt(dat[1]);
+        dia = Integer.parseInt(dat[0]);
+        mes = Integer.parseInt(dat[1]);
     
-    j=c.get(Calendar.DAY_OF_MONTH);
-    i=c.get(Calendar.MONTH);
+        j=c.get(Calendar.DAY_OF_MONTH);
+        i=1 + c.get(Calendar.MONTH);
+
+        System.out.println("mes: "+ i +" Dia " + j);
     
-    if(mes>=i) {
-        if(dia>j) {
-            return true;
+        if(mes>i) {
+           return true;
+        }else if(mes == i){
+            if (dia>j){
+                return true;
+            }
         }
         return false;
     }
-    return false;
-}
+
+    public static String conferirId(){
+        String id = lerId();
+
+        while(buscarIdVeiculo(id) != null){
+            System.out.println("Id ja existente");
+            id = lerId();
+        }
+        return id;
+
+    }
 
     public static Veiculo dadosVeiculo(){
         System.out.println("Qual veiculo sera adicionado? (1 - Carro / 2 - Moto / 3 - Van)");
         int i = entrada.nextInt();
         if (i == 1){
-            
             System.out.println("e automatico?: 1 - Sim / 2 - Nao ");
             boolean aut;
             if (entrada.nextInt() == 1){
                 aut = true;
             }else aut = false;
             System.out.println("Qual o valor de entrada: ");
-            double ve = entrada.nextDouble();
-            
-            return v = new Carro(marca,modelo, true, lerAno(),lerKmRodados(),LerId(),aut,ve);
+            e = new Scanner(System.in);
+            double ve = e.nextDouble();
+            return v = new Carro(lerMarca(),lerModelo(), true, lerAno(),lerKmRodados(),conferirId(),aut,ve);
         
         }
         if (i == 2){
             System.out.println("Numero de marchas: ");
-            int marchas = entrada.nextInt();
+            e = new Scanner(System.in);
+            int marchas = e.nextInt();
             System.out.println("Categoria: (ex: Street · Scooter · Trail · Naked · Sport)");
-            String cat = entrada.nextLine();
+            e = new Scanner(System.in);
+            String cat = e.nextLine();
 
-            return v = new Moto(lerMarca(),lerModelo(), true, lerAno(),lerKmRodados(),LerId(),marchas,cat);
+            return v = new Moto(lerMarca(),lerModelo(), true, lerAno(),lerKmRodados(),conferirId(),marchas,cat);
         }
         
         System.out.println("Possui porta Automatica?: 1 - Sim / 2 - Nao ");
@@ -262,38 +283,46 @@ public static boolean compararData(String data) {
             aut = true;
         }else aut = false;
         System.out.println("Numero de assentos: ");
-        int nA = entrada.nextInt();
+        e = new Scanner(System.in);
+        int nA = e.nextInt();
 
-        return v = new Van(lerMarca(),lerModelo(), true, lerAno(),lerKmRodados(),LerId(),nA,aut);
+        return v = new Van(lerMarca(),lerModelo(), true, lerAno(),lerKmRodados(),conferirId(),nA,aut);
     }
 
     public static String lerMarca(){
         System.out.println("Marca: ");
-        return entrada.nextLine();
+        e = new Scanner(System.in);
+        return e.nextLine();
     }
 
     public static double lerKmRodados(){
         System.out.println("Km Rodados: ");
-        return entrada.nextDouble();
+        e = new Scanner(System.in);
+        return e.nextDouble();
     }
 
     public static String lerModelo(){
         System.out.println("Modelo: ");
-        return entrada.nextLine();
+        e = new Scanner(System.in);
+        return e.nextLine();
     }
 
     public static int lerAno(){
         System.out.println("Ano Fabricacao: ");
-        return entrada.nextInt();
+        e = new Scanner(System.in);
+        return e.nextInt();
     } 
 
-    public static String LerId(){
+    public static String lerId(){
         System.out.println("Id: ");
-        return entrada.nextLine();
+        e = new Scanner(System.in);
+        return e.nextLine();
     }
 
     public static void cadastrarVeiculo(){
         listaVeiculos.add(dadosVeiculo());
+        System.out.println("Veiculo cadastrado com sucesso");
+        System.out.println("");
     }
 
     public static Veiculo buscarIdVeiculo(String id){
@@ -311,6 +340,7 @@ public static boolean compararData(String data) {
         }
         else {
             listaVeiculos.remove(buscarIdVeiculo(id));
+            System.out.println("Veiculo removido");
         }
         
     }
@@ -329,7 +359,8 @@ public static void exibirListaReserva(){
  */
     public static void exibirDetalheReserva(){
         System.out.println("Entre com o cpf do cliente, na qual deseja ver a reserva: ");
-        String cpf = entrada.nextLine();
+        e = new Scanner(System.in);
+        String cpf = e.nextLine();
         int cont = 0;
         for (Reserva r: listaReserva){
             if(r.getCpfCliente().equals(cpf)){
@@ -346,13 +377,16 @@ public static void exibirListaReserva(){
     public static void exibirListaVeiculoADM(){
         for (Veiculo v : listaVeiculos) {
             System.out.println(v.toString());
+            System.out.println(" ");
         }
     }
 
     public static void exibirDetalheVeiculoADM(){
         int contador=0;
         System.out.println("Digite o Id do veiculo desejado: ");
-        id = entrada.nextLine();
+        e = new Scanner(System.in);
+        id = e.nextLine();
+
         for(Veiculo v: listaVeiculos) {
             if(v.getId().equals(id)) {
                 System.out.println(v);
@@ -390,31 +424,35 @@ public static void exibirListaReserva(){
        }
     }
 
+    ///////////////// metodo que verifica a disponibilidade 
+
     public static void fazerReserva(){
+        System.out.println(" ");
+        if(listaVeiculos.size() != 0){
         v = lerVeiculo();
         int t = lerTempoReserva();
-        String d = lerDataInicio();
-        boolean check = false;
-        while(check == false){
-        if (verificarTempoValido(t) && compararData(d)){
-            check = true;
-        } else {
-            if (verificarTempoValido(t) == false){
-                System.out.println("Tempo de Reserva inválido, insira outro tempo: ");
-                lerTempoReserva();
-            }
-            if (compararData(d)== false){
-                System.out.println("Data inválida, insira outra data: ");
-                lerDataInicio();
-            }
+
+        while (!verificarTempoValido(t)){
+            System.out.println("Tempo de Reserva invalido, insira outro tempo: ");
+            t = lerTempoReserva();
         }
-    }
+
+        String d = lerDataInicio();
+        while (!compararData(d)){
+            System.out.println("Data invalida, insira outra data: ");
+            d = lerDataInicio();
+        }
+        
         if(v == null){
             System.out.println("Veiculo nao encontrado");
         }else{
             v.setDisponivel(false); 
             Reserva r = new Reserva(v,lerNomeCliente(),lerCpf(),d,t);
             listaReserva.add(r);
+            System.out.println("Reserva efetuada");
+        }
+        }else {
+            System.out.println("Nao ha veiculos cadastrados para realizar a reserva");
         }
         
      }
@@ -422,29 +460,34 @@ public static void exibirListaReserva(){
 
     public static String lerNomeCliente(){
         System.out.println("Digite seu nome:");
-        return entrada.nextLine();
+        e = new Scanner(System.in);
+        return e.nextLine();
     }
 
     public static String lerCpf(){
         System.out.println("Digite o CPF: ");
-        return entrada.nextLine();
+        e = new Scanner(System.in);
+        return e.nextLine();
     }
 
     public static Veiculo lerVeiculo(){
         System.out.println("Digite o Id do Veiculo desejado: ");
         String i;
-        i = entrada.nextLine();
+        e = new Scanner(System.in);
+        i = e.nextLine();
         return buscarIdVeiculo(i); 
     }
 
     public static int lerTempoReserva(){
         System.out.println("Digite o Tempo que deseja reservar: ");
-        return entrada.nextInt();
+        e = new Scanner(System.in);
+        return e.nextInt();
     }
 
     public static String lerDataInicio(){
         System.out.println("Digite a Data para Inicio da Reserva: exemplo(DD/MM)");
-        return entrada.nextLine();
+        e = new Scanner(System.in);
+        return e.nextLine();
     } 
 
     public static boolean verificarTempoValido(int tempo){
@@ -456,7 +499,8 @@ public static void exibirListaReserva(){
 
      public static void cancelarReserva(){ 
          System.out.println("Entre com o numero do CPF utilizado na reserva:");
-         String cpf = entrada.nextLine();
+         e = new Scanner(System.in);
+         String cpf = e.nextLine();
          int cont = 0;
          for(Reserva rv: listaReserva){
              if(rv.getCpfCliente().equals(cpf)){
@@ -470,7 +514,5 @@ public static void exibirListaReserva(){
             System.out.println("CPF não encontrado");
         }
      }
-    //Adicionar na classe veiculo um Id, para fazer as pesquisas relacionadas atraves dele
-    //como o cliente escolher qual alugar
 
 }

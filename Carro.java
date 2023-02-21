@@ -23,7 +23,7 @@
     //Metodo que descreve as caracteristicas do carro
     @Override
     public String toString(){
-        return super.toString() + "\nCategoria: " + getEhAutomatico() + "\nValor de Entrada: " + getValorEntrada();
+        return super.toString() + "\nEH Automatico: " + getEhAutomatico() + "\nValor de Entrada: " + getValorEntrada();
     }
     
     //Metodo para calcular o aluguel
