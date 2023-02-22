@@ -15,7 +15,7 @@ public class TratamentoArquivos {
     /**
      * Metodo responsável pela leitura do arquivo .txt, e adiciona em uma lista de Reservas
      * @param nomeArq
-     * @return ArrayList<>
+     * @return lista de reservas provenientes do arquivo
      */
     public static List<Reserva> lerArqReservas(String nomeArq){
         List<Reserva> r = new ArrayList<>();
@@ -60,7 +60,7 @@ public class TratamentoArquivos {
     /**
      * Metodo responsável pela leitura do arquivo .txt, e adiciona em uma lista de Veiculos
      * @param nomeArq
-     * @return ArrayList<Veiculo>
+     * @return  lista de veiculos provenientes do arquivo
      */
      public static List<Veiculo> lerArqVeiculos(String nomeArq){
         List<Veiculo> v = new ArrayList<>();
@@ -103,7 +103,7 @@ public class TratamentoArquivos {
         /**
          * Verifica o tipo de Veiculo.
          * @param veiculos
-         * @return String 
+         * @return String contendo o veiculo
          */
     private static String stringVeiculo(Veiculo veiculos){
         if(veiculos instanceof Carro){

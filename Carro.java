@@ -40,7 +40,10 @@ public class Carro extends Veiculo{
     public String toString(){
         return super.toString() + "\nEH Automatico: " + getEhAutomatico() + "\nValor de Entrada: " + getValorEntrada();
     } 
-    //Metodo para calcular o aluguel
+
+    /**
+     * Metodo para calcular o aluguel
+     */
     @Override
     public double calcularAluguel() {
         if (!ehAutomatico) {
