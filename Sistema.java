@@ -1,7 +1,14 @@
-//import java.text.DateFormat;
+/**
+ * Classe Sistema
+ * Classe responsável por gerenciar o sistema de reserva de veículos. 
+ * Permite o cadastro, remoção, visualização de veículos e reservas. 
+ * Também inclui funcionalidades para verificação de disponibilidade e cancelamento de reservas. 
+ * 
+ * @author Caroline, Cristian, Maria Eduarda, Nicholas 
+ */
+
 import java.util.ArrayList;
 import java.util.List;
-//import java.util.Locale;
 import java.util.Scanner;
 import java.util.Collections;
 import java.util.Calendar;
@@ -15,13 +22,14 @@ public class Sistema {
     private static String id;
     private static Veiculo v;
     public static void main(String[] args) {
-        System.out.println("Bem Vindo!");
-        //TratamentoArquivos.lerArqVeiculos("veiculo.txt");
+        System.out.println("Bem Vindo ao ALUGA FACIL!");
+        atribuirlistaVeiculo();
+        atribuirlistaReserva();
         int s = 1;
         while(s == 1){
-            System.out.println("Escolha o tipo de usuario (1 - Administrador/ 2 - Cliente): ");
-            System.out.println("Ou 3 para sair do sistema");
+            System.out.println("Escolha uma opcao: 1 - Administrador / 2 - Cliente / 3 - Sair do Sistema: ");
             tipoUsuario = entrada.nextInt();
+
             int sair = 0;
 
             switch(tipoUsuario){
@@ -46,6 +54,8 @@ public class Sistema {
         }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
        
     }
+
+    /////// TRATAMENTO DE MENUS ///////
 
     public static void gerarMenuCliente(){
         System.out.println("################ MENU CLIENTE ################");
@@ -91,6 +101,7 @@ public class Sistema {
             case 3:
             exibirListaVeiculoCliente();
             fazerReserva();
+            TratamentoArquivos.salvarListaReserva("reserva.txt",getListaReservas());
             return 1;
             case 4:
             cancelarReserva();
@@ -111,7 +122,7 @@ public class Sistema {
             cadastrarVeiculo();
             return 1;
             case 2:
-            removerVeiculo(lerId());
+            removerVeiculo(lerId(tipoVeiculo("removido")));
             return 1;
             case 3:
             exibirListaVeiculoADM();
@@ -126,20 +137,23 @@ public class Sistema {
             exibirDetalheReserva();
             return 1;
             case 7:
-            menuRelatorio();
-            tratarMenuRelatorio(entrada.nextInt());
+            int sair1 = 0;
+            do{
+                menuRelatorio();
+                tratarMenuRelatorio(entrada.nextInt());
+            }while(sair1 == 0);
             return 1;
             case 8:
             TratamentoArquivos.salvarListaVeiculos("veiculo.txt",getListaVeiculo());
             return 1;
             case 9:
-            TratamentoArquivos.lerArqVeiculos("");
+            atribuirlistaVeiculo();
             return 1;
             case 10:
-            TratamentoArquivos.salvarListaReserva("",getListaReservas());
+            TratamentoArquivos.salvarListaReserva("reserva.txt",getListaReservas());
             return 1;
             case 11:
-            TratamentoArquivos.lerArqReservas("");
+            atribuirlistaReserva();
             return 1;
             case 12:
             return 0;
@@ -152,48 +166,47 @@ public class Sistema {
         }
 
     }  
-
+    
     public static void menuRelatorio(){
         System.out.println("################ RELATORIOS ################");
         System.out.println();
         System.out.println("Escolha uma das opcoes a seguir:"); 
         System.out.println("1 - Relatorio dos Veiculos reservados");
         System.out.println("2 - Relatorio dos Clientes");
-        System.out.println("3 - Voltar"); 
-        /* 
-         * System.out.println("3 - Veiculos mais reservados");
-         * 
-         * novo atributo que controle a quantidade de vezes que o v foi reservado 
-         * exibir a lista ordenada a partir disso
-        */
+        System.out.println("3 - Relatorio Financeiro");
+        System.out.println("4 - Voltar"); 
         System.out.println();
         System.out.println("#############################################"); 
         
     }
 
-    public static void tratarMenuRelatorio(int opcao){
+    public static int tratarMenuRelatorio(int opcao){
         switch(opcao){
-
-
-///////////////////      VOLTAR AQUI
-
-
-            case 1://Mostrar junto o tempo de reserva 
+            case 1: 
             for (Reserva r: listaReserva){
-                System.out.println(r.getVeiculo() + " " + r.getTempoReserva());
+                System.out.println(r.getVeiculo() + "\n" + r.getTempoReserva() + " dias");
+                System.out.println(" ");
             }
-            break;
+            return 1;
+
             case 2:
             for (Reserva r: listaReserva){
                 System.out.println("Cliente: " + r.getNomeCliente() + "/nCPF: "+ r.getCpfCliente());
+                System.out.println(" ");
             }
-            break;
+            return 1;
+
             case 3:
-            return;
+            relatorioFinanceiro();
+            return 1;
+
+            case 4:
+            return 0;
+
             default:
             System.out.println("opcao invalida");
+            return 1;
         }
-        
     }
 
     public static List<Reserva> getListaReservas(){
@@ -208,13 +221,7 @@ public class Sistema {
 
 ///////////////////// TRATAR TEMPO RESERVA /////////////////////////////
 
-
     public static boolean compararData(String data) { 
-        /* 
-        Locale br = new Locale ("pt", "BR");
-        DateFormat dt = DateFormat.getDateInstance(DateFormat.MONTH_FIELD,br);
-        System.out.println(dt.format(c.getTime()));
-        */
         Calendar c = Calendar.getInstance(); 
         String[] dat = data.split("/");
         int dia;
@@ -225,35 +232,49 @@ public class Sistema {
         dia = Integer.parseInt(dat[0]);
         mes = Integer.parseInt(dat[1]);
     
-        j=c.get(Calendar.DAY_OF_MONTH);
-        i=1 + c.get(Calendar.MONTH);
-
-        System.out.println("mes: "+ i +" Dia " + j);
+        j = c.get(Calendar.DAY_OF_MONTH);
+        i = 1 + c.get(Calendar.MONTH);
     
-        if(mes>i) {
+        if (mes > i) {
            return true;
         }else if(mes == i){
-            if (dia>j){
+            if (dia > j){
                 return true;
             }
         }
         return false;
     }
 
-    public static String conferirId(){
-        String id = lerId();
+///////////////// TRATAMENTO VEICULOS /////////////////////
+
+    /**
+     *  Método que confere o Id inserido
+     */
+    public static String conferirId(int tipo){
+        String id = lerId(tipo);
 
         while(buscarIdVeiculo(id) != null){
             System.out.println("Id ja existente");
-            id = lerId();
+            id = lerId(tipo);
         }
         return id;
 
     }
 
-    public static Veiculo dadosVeiculo(){
-        System.out.println("Qual veiculo sera adicionado? (1 - Carro / 2 - Moto / 3 - Van)");
+    /**
+     * Método para leitura do tipo de veículo a ser inserido 
+     */
+    public static int tipoVeiculo(String letra){
+        System.out.println("Qual veiculo sera " + letra + "? (1 - Carro / 2 - Moto / 3 - Van)");
         int i = entrada.nextInt();
+        return i;
+    }
+
+    /** 
+     * Método para inserção dos dados do veículo 
+     */
+    public static Veiculo dadosVeiculo(){
+        int i = tipoVeiculo("adicionado");
         if (i == 1){
             System.out.println("e automatico?: 1 - Sim / 2 - Nao ");
             boolean aut;
@@ -263,7 +284,7 @@ public class Sistema {
             System.out.println("Qual o valor de entrada: ");
             e = new Scanner(System.in);
             double ve = e.nextDouble();
-            return v = new Carro(lerMarca(),lerModelo(), true, lerAno(),lerKmRodados(),conferirId(),aut,ve);
+            return v = new Carro(lerMarca(),lerModelo(), true, lerAno(),lerKmRodados(),conferirId(i),aut,ve);
         
         }
         if (i == 2){
@@ -274,7 +295,7 @@ public class Sistema {
             e = new Scanner(System.in);
             String cat = e.nextLine();
 
-            return v = new Moto(lerMarca(),lerModelo(), true, lerAno(),lerKmRodados(),conferirId(),marchas,cat);
+            return v = new Moto(lerMarca(),lerModelo(), true, lerAno(),lerKmRodados(),conferirId(i),marchas,cat);
         }
         
         System.out.println("Possui porta Automatica?: 1 - Sim / 2 - Nao ");
@@ -286,45 +307,105 @@ public class Sistema {
         e = new Scanner(System.in);
         int nA = e.nextInt();
 
-        return v = new Van(lerMarca(),lerModelo(), true, lerAno(),lerKmRodados(),conferirId(),nA,aut);
+        return v = new Van(lerMarca(),lerModelo(), true, lerAno(),lerKmRodados(),conferirId(i),nA,aut);
     }
 
+    /**
+     * Responsável pela leitura dos Kms rodados do veiculo inserido pelo usuario 
+     */
     public static String lerMarca(){
         System.out.println("Marca: ");
         e = new Scanner(System.in);
         return e.nextLine();
     }
 
+    /**
+     *  Método que atribui à lista de veículos, os dados da lista gerado pelo Tratamento de Arquivo 
+     */
+    public static  void atribuirlistaVeiculo(){
+        for (Veiculo vel : TratamentoArquivos.lerArqVeiculos("veiculo.txt")) {
+            listaVeiculos.add(vel);
+        }
+    }
+
+    /** 
+     * Responsável pela leitura dos Kms rodados do veiculo inserido pelo usuario 
+     */
     public static double lerKmRodados(){
         System.out.println("Km Rodados: ");
         e = new Scanner(System.in);
         return e.nextDouble();
     }
 
+    /**
+     *  Responsável pela leitura do Modelo do veiculo inserido pelo usuario 
+     */
     public static String lerModelo(){
         System.out.println("Modelo: ");
         e = new Scanner(System.in);
         return e.nextLine();
     }
 
+    /**
+     * Responsável pela leitura do Ano de fabricação do veiculo inserido pelo usuario 
+     */
     public static int lerAno(){
         System.out.println("Ano Fabricacao: ");
         e = new Scanner(System.in);
         return e.nextInt();
     } 
 
-    public static String lerId(){
-        System.out.println("Id: ");
+
+    /**
+     *  Método responsável por verificar o Id para identificar o tipo de Veículo 
+     */
+    private static boolean verificarId(String id, int tipo){
+        String letra = id.substring(0, 1);
+
+        if(letra.equals("C") && (tipo == 1)){
+            return true;
+        }
+
+        if (letra.equals("M") && (tipo == 2)) {
+            return true;
+        }   
+
+        if (letra.equals("V") && (tipo == 3)){
+            return true;
+        }
+        
+        
+        return false;
+    }
+    
+    /**
+     * Método responsável por Ler o Id do veículo inserido pelo usuário 
+     */
+    public static String lerId(int tipo){
+        System.out.println("Id: (inicie com 'C' para carro, 'M' para moto e 'V' para Van, por exemplo 'C123') ");
         e = new Scanner(System.in);
-        return e.nextLine();
+        String entrada = e.nextLine();
+        
+        while (!verificarId(entrada,tipo)){
+            System.out.println("Formato invalido, digite novamente");
+            entrada = e.nextLine();
+        }
+        return entrada;
+
     }
 
+    /** 
+     * Método responsável por realizar o cadastro do veículo desejado 
+     */
     public static void cadastrarVeiculo(){
         listaVeiculos.add(dadosVeiculo());
         System.out.println("Veiculo cadastrado com sucesso");
         System.out.println("");
     }
 
+    /** 
+     * Método que Busca Id do veículo a partir da lista de Veículos 
+     */
     public static Veiculo buscarIdVeiculo(String id){
         for (Veiculo veiculo : listaVeiculos) {
             if (id.equals(veiculo.getId())){
@@ -334,6 +415,9 @@ public class Sistema {
         return null;
     }
 
+    /** 
+     * Método responsável por percorrer a lista de Véiculos a partir do Id e realiza a remoção, caso exista. 
+     */
     public static void removerVeiculo(String id){
         if ( buscarIdVeiculo(id).equals(null)){
             System.out.println("Veiculo nao encontrado ");
@@ -344,7 +428,82 @@ public class Sistema {
         }
         
     }
-////////////////////////////////////
+
+    /** 
+     * Exibe a Lista completa de Veículos 
+     */
+    public static void exibirListaVeiculoADM(){
+        for (Veiculo v : listaVeiculos) {
+            System.out.println(v.toString());
+            System.out.println(" ");
+        }
+    }
+
+    /** 
+     * Percorre a Lista de Veículos e exibe detalhes de um veículo especifico a partir do ID 
+     */
+    public static void exibirDetalheVeiculoADM(){
+        int contador=0;
+        System.out.println("Digite o Id do veiculo desejado: ");
+        e = new Scanner(System.in);
+        id = e.nextLine();
+
+        for(Veiculo v: listaVeiculos) {
+            if(v.getId().equals(id)) {
+                System.out.println(v);
+                contador++;
+            }
+        }
+        if(contador==0) {
+            System.out.println("Numero de Id inexistente");    
+        }
+    }
+
+    /** 
+     * Exibe a Lista de Veículos Disponíveis para fazer reserva 
+     */ 
+    public static void exibirListaVeiculoCliente(){
+        for(Veiculo v: listaVeiculos) {
+            if(v.getDisponivel()==true) {
+                System.out.println(v);
+                System.out.println("");
+            }
+        }
+    }
+        
+    /** 
+     * Verifica quais veiculos tem o atributo 'disponivel' como verdadeiro,
+     * antes de exibir todos os atributos
+     */
+    public static void exibirDetalheVeiculoCliente(){
+        String i;
+        System.out.println("Entre com o id do veiculo para saber detalhes:");
+        i = entrada.nextLine();
+        for(Veiculo v: listaVeiculos){
+           if(v.getId().equals(i)){
+               System.out.println(v);
+           }
+           else{
+               System.out.println(" Veiculo não encontrado");
+           }
+       }
+    }
+
+
+///////////////////// TRATAMENTO RESERVA ////////////////////
+
+/**
+ * Método que atribui à lista de reservas, os dados da lista gerada pelo Tratamento de Arquivo 
+ */
+public static  void atribuirlistaReserva(){
+    for (Reserva res : TratamentoArquivos.lerArqReservas("reserva.txt")) {
+        listaReserva.add(res);
+    }
+}
+
+/** 
+ * Método que exibe a lista de reserva
+ */
 public static void exibirListaReserva(){
     for(Reserva r: listaReserva) {
         System.out.println("Nome: " + r.getNomeCliente());
@@ -353,9 +512,8 @@ public static void exibirListaReserva(){
     }
 }
 
-/*
- * Metodo responsavel por fazer uma busca no List listaReserva
- * e fazer a sua impressao na tela 
+/**
+ *  Exibe os detalhes de uma reserva específica, percorrendo a lista de reserva de acordo com o Cpf
  */
     public static void exibirDetalheReserva(){
         System.out.println("Entre com o cpf do cliente, na qual deseja ver a reserva: ");
@@ -374,62 +532,16 @@ public static void exibirListaReserva(){
 
     }
 
-    public static void exibirListaVeiculoADM(){
-        for (Veiculo v : listaVeiculos) {
-            System.out.println(v.toString());
-            System.out.println(" ");
-        }
-    }
-
-    public static void exibirDetalheVeiculoADM(){
-        int contador=0;
-        System.out.println("Digite o Id do veiculo desejado: ");
-        e = new Scanner(System.in);
-        id = e.nextLine();
-
-        for(Veiculo v: listaVeiculos) {
-            if(v.getId().equals(id)) {
-                System.out.println(v);
-                contador++;
-            }
-        }
-        if(contador==0) {
-            System.out.println("Numero de Id inexistente");    
-        }
-    }
-
-    //verifica quais veiculos tem o atributo "disponivel" = true, antes de exibir
-    //alguns atributos 
-    public static void exibirListaVeiculoCliente(){
-        for(Veiculo v: listaVeiculos) {
-            if(v.getDisponivel()==true) {
-                System.out.println(v);
-            }
-        }
-    }
-        
-    //verifica quais veiculos tem o atributo "disponivel" = true, antes de exibir 
-    //tds os atributos
-    public static void exibirDetalheVeiculoCliente(){
-        String i;
-        System.out.println("Entre com o id do veiculo para saber detalhes:");
-        i = entrada.nextLine();
-        for(Veiculo v: listaVeiculos){
-           if(v.getId().equals(i)){
-               System.out.println(v);
-           }
-           else{
-               System.out.println(" Veiculo não encontrado");
-           }
-       }
-    }
-
     ///////////////// metodo que verifica a disponibilidade 
 
     public static void fazerReserva(){
         System.out.println(" ");
         if(listaVeiculos.size() != 0){
         v = lerVeiculo();
+        while (v==null){
+            System.out.println("Veiculo nao encontrado");
+            v = lerVeiculo();
+        }
         int t = lerTempoReserva();
 
         while (!verificarTempoValido(t)){
@@ -438,27 +550,25 @@ public static void exibirListaReserva(){
         }
 
         String d = lerDataInicio();
+
         while (!compararData(d)){
             System.out.println("Data invalida, insira outra data: ");
             d = lerDataInicio();
         }
+
+        v.setDisponivel(false); 
+
+        Reserva r = new Reserva(v,lerNomeCliente(),lerCpf(),d,t);
+        listaReserva.add(r);
+        System.out.println("Reserva efetuada " + "\nValor: " + v.calcularAluguel());
         
-        if(v == null){
-            System.out.println("Veiculo nao encontrado");
-        }else{
-            v.setDisponivel(false); 
-            Reserva r = new Reserva(v,lerNomeCliente(),lerCpf(),d,t);
-            listaReserva.add(r);
-            System.out.println("Reserva efetuada");
-        }
         }else {
             System.out.println("Nao ha veiculos cadastrados para realizar a reserva");
         }
         
      }
 
-
-    public static String lerNomeCliente(){
+     public static String lerNomeCliente(){
         System.out.println("Digite seu nome:");
         e = new Scanner(System.in);
         return e.nextLine();
@@ -502,17 +612,42 @@ public static void exibirListaReserva(){
          e = new Scanner(System.in);
          String cpf = e.nextLine();
          int cont = 0;
-         for(Reserva rv: listaReserva){
-             if(rv.getCpfCliente().equals(cpf)){
-                 listaReserva.remove(rv);
-                 System.out.println("Reserva Removida com sucesso");
-                 cont = 1;
-                 v.setDisponivel(true);
-             }
-         }
+         
+        for(Reserva rv: listaReserva){
+            if(rv.getCpfCliente().equals(cpf)){ 
+                rv.getVeiculo().setDisponivel(true);
+                listaReserva.remove(rv);
+                System.out.println("Reserva Removida com sucesso");
+                cont = 1;
+                break;
+            }
+        }
+            
          if(cont == 0){
             System.out.println("CPF não encontrado");
         }
-     }
+    }
 
+
+    public static void relatorioFinanceiro(){
+        System.out.println("Digite o mes desejado: ex ('1' para o mes de janeiro)");
+        e = new Scanner(System.in);
+        int mes = e.nextInt();
+        double total = 0;
+
+        for (Reserva val : listaReserva) {
+            String data = val.getDataInicio();
+            String[] dat = data.split("/");
+            int datames = Integer.parseInt(dat[1]);
+
+            if (mes == datames){
+                total = total + val.getVeiculo().calcularAluguel();
+            }
+
+
+        } 
+
+        System.out.println("############ RELATORIO FINANCEIRO ############");
+        System.out.println("No mes " + mes + " o faturamento foi de: " + total);
+    }
 }

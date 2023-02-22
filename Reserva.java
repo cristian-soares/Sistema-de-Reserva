@@ -1,3 +1,11 @@
+/**
+ * Representa uma reserva de um veículo feita por um cliente. 
+ * Contém informações sobre o veículo reservado, o cliente que fez a reserva, 
+ * o período de reserva e o preço a ser pago.
+ * 
+ * @author Cristian, Maria Eduarda
+ */
+
 public class Reserva {
     private String nomeCliente;
     private String cpfCliente;

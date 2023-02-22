@@ -1,3 +1,9 @@
+/**
+ * Classe responsável por tratar arquivos de texto utilizados no sistema de reserva de veículos.
+ * Permite a escrita e leitura de informações dos veículos e reservas, bem como a verificação de existência de arquivos.
+ * @author Maria Eduarda, Cristian
+ */
+
 import java.util.List;
 import java.util.ArrayList;
 import java.io.*;
@@ -12,14 +18,15 @@ public class TratamentoArquivos {
             String linha = arq.readLine();
 
             if(linha == null){
-                System.out.println("Arquivo vazio");
+                System.out.println(nomeArq + ": Arquivo vazio");
             }
 
             while(linha != null){
                 String[] campos = linha.split(",");
+                
                 int tipo = retornaTipoVeiculo(campos[5]);
                 veiculo = criarVeiculo(campos, tipo);
-                 reserva = new Reserva(veiculo,campos[8],campos[9],campos[10],Integer.parseInt(campos[11]));
+                reserva = new Reserva(veiculo,campos[8],campos[9],campos[10],Integer.parseInt(campos[11]));
                 r.add(reserva);
 
                 linha = arq.readLine();
@@ -33,7 +40,7 @@ public class TratamentoArquivos {
     public static void salvarListaReserva(String nomeArq, List<Reserva> reserva){
         try(FileWriter arq = new FileWriter(nomeArq)) {
             for(Reserva reservas: reserva){
-                arq.write(stringVeiculo(reservas.getVeiculo()) + "," + reservas.getNomeCliente() + "," + reservas.getCpfCliente() + "," + reservas.getTempoReserva());
+                arq.write(stringVeiculo(reservas.getVeiculo()) + "," + reservas.getNomeCliente() + "," + reservas.getCpfCliente() + "," + reservas.getDataInicio() + "," + reservas.getTempoReserva() + "\n");
             }
         } catch (IOException e) {
             System.out.println("Falha ao salvar no arquivo" + nomeArq);
@@ -46,16 +53,14 @@ public class TratamentoArquivos {
             String linha = arq.readLine();
 
             if(linha == null){
-                System.out.println("Arquivo vazio");
+                System.out.println(nomeArq + ": Arquivo vazio");
             }
 
             while(linha != null){
                 String[] campos = linha.split(",");
-
                 int tipo = retornaTipoVeiculo(campos[5]);
                 veiculo = criarVeiculo(campos, tipo);
                 v.add(veiculo);
-
                 linha = arq.readLine();
             }
             
@@ -68,7 +73,7 @@ public class TratamentoArquivos {
     public static void salvarListaVeiculos(String nomeArq, List<Veiculo> v){
         try(FileWriter arq = new FileWriter(nomeArq)) {
             for(var veiculos: v){
-                arq.write(stringVeiculo(veiculos));
+                arq.write(stringVeiculo(veiculos )+ "\n");
             }
         } catch (IOException e) {
             System.out.println("Falha ao salvar no arquivo " + nomeArq);

@@ -1,0 +1,2 @@
+Nissan,Versa,true,2013,21000.0,C123,false,120.0
+Hyundai,Veloster,true,2021,2100.0,C12345,true,100.0

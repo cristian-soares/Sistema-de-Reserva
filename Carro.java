@@ -1,26 +1,39 @@
-    //Classe Carro, representa um dos veículos disponíveis para aluguel
-    public class Carro extends Veiculo{
+    /**
+     * Classe Carro, responsável pela implemnetação das características do carro, além do cálculo do aluguel
+     * @author Caroline, Nicholas
+    */
+
+public class Carro extends Veiculo{
         private boolean ehAutomatico;  
         private double valorEntrada; 
         
-    //Construtor da classe 
+    /**
+     * Construtor da classe 
+     */
+
     public Carro(String marca, String modelo, boolean disponivel, int anoFabricacao,double kmRodados,String id, boolean ehAutomatico, double valorEntrada){
         super(marca, modelo, disponivel, anoFabricacao, kmRodados,id);
         this.ehAutomatico = ehAutomatico;
         this.valorEntrada = valorEntrada;
     }
     
-    //Metodo para retornar se o carro e automatico
+    /**
+    * Metodo para retornar se o carro e automatico 
+    */
     public boolean getEhAutomatico(){
         return ehAutomatico;
     }
     
-    //Metodo para retornar o valor da entrada, para alugar o carro
+    /**
+     * Metodo para retornar o valor da entrada, para alugar o carro
+     */
     public double getValorEntrada(){
         return valorEntrada;
     }
 
-    //Metodo que descreve as caracteristicas do carro
+    /**
+     * Metodo que descreve as caracteristicas do carro 
+     * */
     @Override
     public String toString(){
         return super.toString() + "\nEH Automatico: " + getEhAutomatico() + "\nValor de Entrada: " + getValorEntrada();

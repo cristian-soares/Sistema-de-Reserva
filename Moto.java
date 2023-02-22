@@ -1,6 +1,9 @@
+ /**
+     * Classe Carro, responsável pela implemnetação das características da Moto, além do cálculo do aluguel
+     * @author Caroline, Nicholas
+    */
 
-public class Moto extends Veiculo
-{
+public class Moto extends Veiculo{
     private int numeroDeMarchas;
     private String categoria; //ex: 1-Street · 2- Scooter · 3- Trail · 4- Naked · 5- Sport
     

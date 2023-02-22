@@ -1,5 +1,9 @@
-public class Van extends Veiculo
-{
+ /**
+     * Classe Carro, responsável pela implemnetação das características da van, além do cálculo do aluguel
+     * @author Caroline, Nicholas
+    */
+
+public class Van extends Veiculo{
     private int numeroDeAssentos;
     private boolean possuiPortaAutomatica;
     

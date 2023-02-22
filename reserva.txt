@@ -1,0 +1,2 @@
+Honda,WR-V,false,2019,7800.0,V098,8,true,Carol,1234566,02/03,6
+Fiat,Mobi,false,2021,4800.0,C123,false,200.0,Maria Eduarda,0987654321,25/02,5
