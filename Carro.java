@@ -1,5 +1,5 @@
     /**
-     * Classe Carro, responsável pela implemnetação das características do carro, além do cálculo do aluguel
+     * Classe Carro, responsável pela implementação das características do carro e cálculo do aluguel
      * @author Caroline, Nicholas
     */
 
@@ -18,14 +18,16 @@ public class Carro extends Veiculo{
     }
     
     /**
-    * Metodo para retornar se o carro e automatico 
-    */
+     * Metodo para retornar se o carro e automatico 
+     * @return boolean verificando se o carro é automatico.
+     */
     public boolean getEhAutomatico(){
         return ehAutomatico;
     }
     
     /**
      * Metodo para retornar o valor da entrada, para alugar o carro
+     * @return valor de entrada do inserido pelo usuario
      */
     public double getValorEntrada(){
         return valorEntrada;
@@ -33,12 +35,11 @@ public class Carro extends Veiculo{
 
     /**
      * Metodo que descreve as caracteristicas do carro 
-     * */
+     */
     @Override
     public String toString(){
         return super.toString() + "\nEH Automatico: " + getEhAutomatico() + "\nValor de Entrada: " + getValorEntrada();
-    }
-    
+    } 
     //Metodo para calcular o aluguel
     @Override
     public double calcularAluguel() {
