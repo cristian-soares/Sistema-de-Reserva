@@ -1,5 +1,5 @@
  /**
-     * Classe Carro, responsável pela implemnetação das características da van, além do cálculo do aluguel
+     * Classe Carro, responsável pela implemnetação das características da van e cálculo do aluguel
      * @author Caroline, Nicholas
     */
 

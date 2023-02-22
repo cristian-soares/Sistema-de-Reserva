@@ -1,5 +1,5 @@
  /**
-     * Classe Carro, responsável pela implemnetação das características da Moto, além do cálculo do aluguel
+     * Classe Carro, responsável pela implemnetação das características da Moto e cálculo do aluguel
      * @author Caroline, Nicholas
     */
 

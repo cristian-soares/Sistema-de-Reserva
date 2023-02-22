@@ -12,6 +12,11 @@ public class TratamentoArquivos {
     private static Reserva reserva;
     private static Veiculo veiculo;
 
+    /**
+     * Metodo responsável pela leitura do arquivo .txt, e adiciona em uma lista de Reservas
+     * @param nomeArq
+     * @return ArrayList<>
+     */
     public static List<Reserva> lerArqReservas(String nomeArq){
         List<Reserva> r = new ArrayList<>();
         try (BufferedReader arq = new BufferedReader(new FileReader(nomeArq))){
@@ -37,6 +42,11 @@ public class TratamentoArquivos {
         return r;
     }
 
+    /**
+     * Metodo responsável por salvar em um arquivo .txt, uma lista de Reservas, provenientes da Classe Sistema
+     * @param nomeArq
+     * @param reserva
+     */
     public static void salvarListaReserva(String nomeArq, List<Reserva> reserva){
         try(FileWriter arq = new FileWriter(nomeArq)) {
             for(Reserva reservas: reserva){
@@ -47,6 +57,11 @@ public class TratamentoArquivos {
         }
     }
 
+    /**
+     * Metodo responsável pela leitura do arquivo .txt, e adiciona em uma lista de Veiculos
+     * @param nomeArq
+     * @return ArrayList<Veiculo>
+     */
      public static List<Veiculo> lerArqVeiculos(String nomeArq){
         List<Veiculo> v = new ArrayList<>();
         try (BufferedReader arq = new BufferedReader(new FileReader(nomeArq))){
@@ -70,9 +85,14 @@ public class TratamentoArquivos {
         return v;
     } 
 
+        /**
+         * Metodo responsável por salvar em um arquivo .txt, uma lista de Veiculos, provenientes da Classe Sistema
+         * @param nomeArq
+         * @param v
+         */
     public static void salvarListaVeiculos(String nomeArq, List<Veiculo> v){
         try(FileWriter arq = new FileWriter(nomeArq)) {
-            for(var veiculos: v){
+            for(Veiculo veiculos: v){
                 arq.write(stringVeiculo(veiculos )+ "\n");
             }
         } catch (IOException e) {
@@ -80,6 +100,11 @@ public class TratamentoArquivos {
         }
     }
 
+        /**
+         * Verifica o tipo de Veiculo.
+         * @param veiculos
+         * @return String 
+         */
     private static String stringVeiculo(Veiculo veiculos){
         if(veiculos instanceof Carro){
             Carro carro = (Carro) veiculos;
@@ -95,6 +120,11 @@ public class TratamentoArquivos {
         
     }
 
+    /**
+     * Metodo que retorna um inteiro para ser usado na comparação com os tipos de veiculos.
+     * @param id
+     * @return int
+     */
     private static int retornaTipoVeiculo(String id){
         String letra = id.substring(0, 1);
         if(letra.equals("C")){
@@ -105,6 +135,12 @@ public class TratamentoArquivos {
         return 3;
     }
 
+    /**
+     * Metodo que instancia os veiculos de acordos com os tipos
+     * @param campos
+     * @param tipo
+     * @return veiculo
+     */
     private static Veiculo criarVeiculo(String[] campos, int tipo){
 
         if(tipo == 1)//Carro

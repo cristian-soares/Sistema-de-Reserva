@@ -57,6 +57,9 @@ public class Sistema {
 
     /////// TRATAMENTO DE MENUS ///////
 
+    /**
+    * Metodo responsavel por exibir o menu especifico para o cliente
+    */
     public static void gerarMenuCliente(){
         System.out.println("################ MENU CLIENTE ################");
         System.out.println();
@@ -70,6 +73,9 @@ public class Sistema {
         System.out.println("##############################################"); 
     }
 
+    /**
+    * Metodo responsavel por exibir o menu especifico para o adiministrador
+    */
     public static void gerarMenuAdm(){
         System.out.println("############## MENU ADMINISTRADOR ##############");
         System.out.println();
@@ -90,6 +96,11 @@ public class Sistema {
         System.out.println("###############################################"); 
     }
 
+    /**
+     * Metodo responsavel por executar a resposta do usuario cliente 
+     * @param opcao se refere a opcao escolhida pela usuario
+     * @return  valor inteiro que controla o loop do menu
+     */
     public static int tratarMenuCliente(int opcao){
         switch(opcao){
             case 1:
@@ -116,6 +127,11 @@ public class Sistema {
         }
     }
 
+    /**
+     * Metodo responsavel por executar a resposta do usuario adm 
+     * @param opcao se refere a opcao escolhida pela usuario
+     * @return  valor inteiro que controla o looping do menu
+     */
     public static int tratarMenuAdm(int opcao){
         switch(opcao){
             case 1:
@@ -167,6 +183,9 @@ public class Sistema {
 
     }  
     
+    /**
+    * Metodo responsavel por exibir o menu de relatorios
+    */
     public static void menuRelatorio(){
         System.out.println("################ RELATORIOS ################");
         System.out.println();
@@ -180,6 +199,11 @@ public class Sistema {
         
     }
 
+    /**
+     * Metodo responsavel por executar a resposta do usuario adm 
+     * @param opcao se refere a opcao escolhida pela usuario
+     * @return  valor inteiro que controla o looping do menu
+     */
     public static int tratarMenuRelatorio(int opcao){
         switch(opcao){
             case 1: 
@@ -209,10 +233,20 @@ public class Sistema {
         }
     }
 
+    /**
+     * Metodo que retorna uma copia da lista de reservas do sistema
+     * 
+     * @return copia da lista de reservas
+     */
     public static List<Reserva> getListaReservas(){
         return Collections.unmodifiableList(listaReserva);
     }
 
+    /**
+     * Metodo que retorna uma copia da lista de veiculos do sistema
+     * 
+     * @return copia da lista de veiculos
+     */
     public static List<Veiculo> getListaVeiculo(){
         return Collections.unmodifiableList(listaVeiculos);
     }
@@ -221,6 +255,14 @@ public class Sistema {
 
 ///////////////////// TRATAR TEMPO RESERVA /////////////////////////////
 
+    /**
+     * Metodo que faz a comparacao da data do computador com a data
+     * que o usuario deseja cadastrar
+     * 
+     * @param data variavel que contem a data que o usuario deseja cadastrar
+     * @return true se a data desejada for maior que a do computador
+     * false se a data for inferior
+     */
     public static boolean compararData(String data) { 
         Calendar c = Calendar.getInstance(); 
         String[] dat = data.split("/");
@@ -248,7 +290,9 @@ public class Sistema {
 ///////////////// TRATAMENTO VEICULOS /////////////////////
 
     /**
-     *  Método que confere o Id inserido
+     * Metodo que retorna o ID do veiculo para conferencia.
+     * @param tipo
+     * @return id 
      */
     public static String conferirId(int tipo){
         String id = lerId(tipo);
@@ -261,8 +305,11 @@ public class Sistema {
 
     }
 
+
     /**
-     * Método para leitura do tipo de veículo a ser inserido 
+     * Método para leitura do tipo de veículo a ser inserido
+     * @param letra
+     * @return inteiro contendo o tipo de veiculo
      */
     public static int tipoVeiculo(String letra){
         System.out.println("Qual veiculo sera " + letra + "? (1 - Carro / 2 - Moto / 3 - Van)");
@@ -270,8 +317,10 @@ public class Sistema {
         return i;
     }
 
-    /** 
+
+    /**
      * Método para inserção dos dados do veículo 
+     * @return veiculo 
      */
     public static Veiculo dadosVeiculo(){
         int i = tipoVeiculo("adicionado");
@@ -310,8 +359,9 @@ public class Sistema {
         return v = new Van(lerMarca(),lerModelo(), true, lerAno(),lerKmRodados(),conferirId(i),nA,aut);
     }
 
-    /**
+   /**
      * Responsável pela leitura dos Kms rodados do veiculo inserido pelo usuario 
+     * @return string com marca que o usuario digitou
      */
     public static String lerMarca(){
         System.out.println("Marca: ");
@@ -320,7 +370,7 @@ public class Sistema {
     }
 
     /**
-     *  Método que atribui à lista de veículos, os dados da lista gerado pelo Tratamento de Arquivo 
+     *  Método que atribui à lista de veículos, os dados da lista gerada pelo Tratamento de Arquivo 
      */
     public static  void atribuirlistaVeiculo(){
         for (Veiculo vel : TratamentoArquivos.lerArqVeiculos("veiculo.txt")) {
@@ -330,6 +380,7 @@ public class Sistema {
 
     /** 
      * Responsável pela leitura dos Kms rodados do veiculo inserido pelo usuario 
+     * @return double com os kms que o usuario iseriu
      */
     public static double lerKmRodados(){
         System.out.println("Km Rodados: ");
@@ -339,6 +390,7 @@ public class Sistema {
 
     /**
      *  Responsável pela leitura do Modelo do veiculo inserido pelo usuario 
+     * @return string com o modelo que o usuario digitou
      */
     public static String lerModelo(){
         System.out.println("Modelo: ");
@@ -348,6 +400,7 @@ public class Sistema {
 
     /**
      * Responsável pela leitura do Ano de fabricação do veiculo inserido pelo usuario 
+     * @return int com o ano que o usuario digitou
      */
     public static int lerAno(){
         System.out.println("Ano Fabricacao: ");
@@ -356,8 +409,12 @@ public class Sistema {
     } 
 
 
-    /**
+   /**
      *  Método responsável por verificar o Id para identificar o tipo de Veículo 
+     * @param id id que o usuario digitou
+     * @param tipo tipo de veiculo que o usuario deseja incluir na lista 
+     * @return boolean true se for possivel usar o id desejado
+     * @return boolean false se nao for possivel usar o id desejado
      */
     private static boolean verificarId(String id, int tipo){
         String letra = id.substring(0, 1);
@@ -380,6 +437,8 @@ public class Sistema {
     
     /**
      * Método responsável por Ler o Id do veículo inserido pelo usuário 
+     * @param tipo tipo de veiculo que o usuario deseja incluir na lista 
+     * @return string com o valor do id valido 
      */
     public static String lerId(int tipo){
         System.out.println("Id: (inicie com 'C' para carro, 'M' para moto e 'V' para Van, por exemplo 'C123') ");
@@ -405,6 +464,9 @@ public class Sistema {
 
     /** 
      * Método que Busca Id do veículo a partir da lista de Veículos 
+     * @param id valor de id correspondenre ao veiculo que o usuario deseja procurar
+     * @return veiculo se ele existir na lista 
+     * @return null se o objeto nao for encontrado
      */
     public static Veiculo buscarIdVeiculo(String id){
         for (Veiculo veiculo : listaVeiculos) {
@@ -415,8 +477,10 @@ public class Sistema {
         return null;
     }
 
-    /** 
-     * Método responsável por percorrer a lista de Véiculos a partir do Id e realiza a remoção, caso exista. 
+  
+    /**
+     * Método responsável por percorrer a lista de Véiculos a partir do Id e realiza a remoção, caso exista.
+     * @param id
      */
     public static void removerVeiculo(String id){
         if ( buscarIdVeiculo(id).equals(null)){
@@ -440,7 +504,7 @@ public class Sistema {
     }
 
     /** 
-     * Percorre a Lista de Veículos e exibe detalhes de um veículo especifico a partir do ID 
+     * Percorre a Lista de Veículos e exibe detalhes de um veículo especifico a partir do Id 
      */
     public static void exibirDetalheVeiculoADM(){
         int contador=0;
@@ -492,29 +556,29 @@ public class Sistema {
 
 ///////////////////// TRATAMENTO RESERVA ////////////////////
 
-/**
- * Método que atribui à lista de reservas, os dados da lista gerada pelo Tratamento de Arquivo 
- */
-public static  void atribuirlistaReserva(){
-    for (Reserva res : TratamentoArquivos.lerArqReservas("reserva.txt")) {
-        listaReserva.add(res);
+    /**
+     * Método que atribui à lista de reservas, os dados da lista gerada pelo Tratamento de Arquivo 
+     */
+    public static  void atribuirlistaReserva(){
+        for (Reserva res : TratamentoArquivos.lerArqReservas("reserva.txt")) {
+            listaReserva.add(res);
+        }
     }
-}
 
-/** 
- * Método que exibe a lista de reserva
- */
-public static void exibirListaReserva(){
-    for(Reserva r: listaReserva) {
-        System.out.println("Nome: " + r.getNomeCliente());
-        System.out.println("Tempo de reserva: " + r.getTempoReserva() + " dias");
+    /** 
+     * Método que exibe a lista de reserva com o nome do cliente e o tempo de reserva em dias
+     */
+    public static void exibirListaReserva(){
+        for(Reserva r: listaReserva) {
+            System.out.println("Nome: " + r.getNomeCliente());
+            System.out.println("Tempo de reserva: " + r.getTempoReserva() + " dias");
 
+        }
     }
-}
 
-/**
- *  Exibe os detalhes de uma reserva específica, percorrendo a lista de reserva de acordo com o Cpf
- */
+    /**
+    *  Exibe os detalhes de uma reserva específica, percorrendo a lista de reserva de acordo com o Cp
+    */
     public static void exibirDetalheReserva(){
         System.out.println("Entre com o cpf do cliente, na qual deseja ver a reserva: ");
         e = new Scanner(System.in);
@@ -530,10 +594,11 @@ public static void exibirListaReserva(){
             System.out.println("CPF não encontrado");
         }
 
-    }
+    }   
 
-    ///////////////// metodo que verifica a disponibilidade 
-
+    /**
+     * Método responsável por fazer a leitura e verificação dos dados necessarios para realizar uma reserva.
+     */
     public static void fazerReserva(){
         System.out.println(" ");
         if(listaVeiculos.size() != 0){
@@ -568,18 +633,31 @@ public static void exibirListaReserva(){
         
      }
 
+
+    /**
+     * Lê o nome inserido pelo usuario.
+     * @return String com o nome do usuario.
+     */
      public static String lerNomeCliente(){
         System.out.println("Digite seu nome:");
         e = new Scanner(System.in);
         return e.nextLine();
     }
 
+    /**
+     * Realiza a leitura do CPF inserido pelo usuario
+     * @return String com o CPF
+     */
     public static String lerCpf(){
         System.out.println("Digite o CPF: ");
         e = new Scanner(System.in);
         return e.nextLine();
     }
 
+    /**
+     * Faz a leitura do ID do veiculo a qual deseja realizar uma reserva.
+     * @return veiculo 
+     */
     public static Veiculo lerVeiculo(){
         System.out.println("Digite o Id do Veiculo desejado: ");
         String i;
@@ -588,18 +666,31 @@ public static void exibirListaReserva(){
         return buscarIdVeiculo(i); 
     }
 
+    /**
+     * Realiza a leitura do tempo de reserva desejado pelo cliente
+     * @return int com o tempo em dias de reserva
+     */
     public static int lerTempoReserva(){
         System.out.println("Digite o Tempo que deseja reservar: ");
         e = new Scanner(System.in);
         return e.nextInt();
     }
 
+    /**
+     * Realiza a leitura da Data de Início da contabilização do tempo da reserva.
+     * @return String com a data
+     */
     public static String lerDataInicio(){
         System.out.println("Digite a Data para Inicio da Reserva: exemplo(DD/MM)");
         e = new Scanner(System.in);
         return e.nextLine();
     } 
 
+    /**
+     * Verifica se o Tempo inserido é menor que o permitido pelo Sistema.
+     * @param tempo
+     * @return true or false
+     */
     public static boolean verificarTempoValido(int tempo){
         if (tempo > 7){
             return false;
@@ -607,6 +698,10 @@ public static void exibirListaReserva(){
             return true;
     }
 
+    /**
+     * Verifica se o CPF insierido está na lista de reservas, então realiza a remoção da reserva referente 
+     * aquele CPF.
+     */
      public static void cancelarReserva(){ 
          System.out.println("Entre com o numero do CPF utilizado na reserva:");
          e = new Scanner(System.in);
@@ -629,6 +724,10 @@ public static void exibirListaReserva(){
     }
 
 
+    /**
+     * Verifica o mês inserido pelo usuário com o mês presente na lista de reservas, 
+     * a partir daí calcula o lucro referente aqule mês
+     */
     public static void relatorioFinanceiro(){
         System.out.println("Digite o mes desejado: ex ('1' para o mes de janeiro)");
         e = new Scanner(System.in);
